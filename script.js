@@ -6,9 +6,20 @@ const year = document.getElementById('year');
 const loader = document.getElementById('loading-screen');
 const loaderStart = Date.now();
 
+// Simple escape to prevent unintentionally rendering HTML from data attributes
+function escapeHtml(unsafe) {
+  return String(unsafe)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 window.addEventListener('load', () => {
   if (!loader) {
     document.body.classList.remove('is-loading');
+    document.body.classList.add('nav-load-ready');
     return;
   }
 
@@ -20,6 +31,7 @@ window.addEventListener('load', () => {
     loader.classList.add('is-hidden');
     window.setTimeout(() => {
       document.body.classList.remove('is-loading');
+      document.body.classList.add('nav-load-ready');
     }, 500);
   }, wait);
 });
@@ -61,6 +73,58 @@ if (menuToggle && nav) {
     });
   });
 }
+
+// Continuous marquee for .service-strip on desktop
+function initServiceMarquee() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.innerWidth < 761) return;
+
+  document.querySelectorAll('.service-strip').forEach((strip) => {
+    // skip if already initialized
+    if (strip.querySelector('.service-track')) return;
+
+    const items = Array.from(strip.children);
+    if (!items.length) return;
+
+    const track = document.createElement('div');
+    track.className = 'service-track';
+    items.forEach((el) => track.appendChild(el));
+
+    // Append track and its clone for seamless loop
+    strip.appendChild(track);
+    const clone = track.cloneNode(true);
+    strip.appendChild(clone);
+
+    // Force layout then compute width to set duration
+    requestAnimationFrame(() => {
+      const trackWidth = track.scrollWidth;
+      // speed: 80px per second (tweakable)
+      const speed = 80;
+      const duration = Math.max(8, Math.round((trackWidth / speed) * 10) / 10);
+      track.style.animationDuration = `${duration}s`;
+      clone.style.animationDuration = `${duration}s`;
+      track.classList.add('is-animating');
+      clone.classList.add('is-animating');
+    });
+
+    // Pause on hover (for touch devices it won't break)
+    strip.addEventListener('mouseenter', () => {
+      strip.querySelectorAll('.service-track').forEach(t => t.style.animationPlayState = 'paused');
+    });
+    strip.addEventListener('mouseleave', () => {
+      strip.querySelectorAll('.service-track').forEach(t => t.style.animationPlayState = 'running');
+    });
+  });
+}
+
+window.addEventListener('load', initServiceMarquee);
+window.addEventListener('resize', () => {
+  // re-init on desktop resize after a short debounce
+  clearTimeout(window.__svcMarqueeTO);
+  window.__svcMarqueeTO = setTimeout(() => {
+    initServiceMarquee();
+  }, 250);
+});
 
 if (form && statusNode) {
   form.addEventListener('submit', async (event) => {
@@ -127,6 +191,7 @@ const reviewStarButtons = reviewModal ? Array.from(reviewModal.querySelectorAll(
 
 if (reviewTrigger && reviewModal) {
   let currentRating = 5;
+  const REVIEW_STORAGE_KEY = 'travel_ceylon_tours_reviews';
 
   const setRating = (rating) => {
     currentRating = rating;
@@ -179,7 +244,10 @@ if (reviewTrigger && reviewModal) {
   });
 
   const loadSavedReviews = () => {
-    const saved = JSON.parse(localStorage.getItem('shantha_tours_reviews') || '[]');
+    const saved = JSON.parse(
+      localStorage.getItem(REVIEW_STORAGE_KEY)
+      || '[]'
+    );
     const reviewStrip = document.querySelector('.review-strip');
     if (!reviewStrip) return;
     
@@ -255,7 +323,10 @@ if (reviewTrigger && reviewModal) {
         }
       }
 
-      const saved = JSON.parse(localStorage.getItem('shantha_tours_reviews') || '[]');
+      const saved = JSON.parse(
+        localStorage.getItem(REVIEW_STORAGE_KEY)
+        || '[]'
+      );
       saved.unshift({
         name,
         country,
@@ -263,7 +334,7 @@ if (reviewTrigger && reviewModal) {
         text: reviewText,
         date: 'Just now'
       });
-      localStorage.setItem('shantha_tours_reviews', JSON.stringify(saved.slice(0, 3)));
+      localStorage.setItem(REVIEW_STORAGE_KEY, JSON.stringify(saved.slice(0, 3)));
 
       reviewForm.reset();
       setRating(5);
@@ -290,7 +361,7 @@ if (tourModal && tourDetailButtons.length) {
     const badge = badgeNode ? badgeNode.textContent.trim() : 'Trending Tour';
     const image = tourCard.style.backgroundImage;
     const description = tourCard.dataset.tourDescription
-      || 'Explore this featured route with a curated experience by Shantha Tours.';
+      || 'Explore this featured route with a curated experience by Travel Ceylon Tours.';
     const features = (tourCard.dataset.tourFeatures || 'Private Transfer|Expert Guide|Flexible Stops')
       .split('|')
       .map((item) => item.trim())
@@ -346,6 +417,109 @@ if (tourModal && tourDetailButtons.length) {
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape' && tourModal.classList.contains('is-open')) {
       closeTourModal();
+    }
+  });
+}
+
+const serviceStrip = document.querySelector('.services-showcase .service-strip');
+const serviceModal = document.getElementById('service-modal');
+const serviceModalClose = serviceModal ? serviceModal.querySelector('.service-modal-close') : null;
+const serviceModalKicker = document.getElementById('service-modal-kicker');
+const serviceModalTitle = document.getElementById('service-modal-title');
+const serviceModalDesc = document.getElementById('service-modal-desc');
+const serviceModalImage = document.getElementById('service-modal-image');
+const serviceModalFeatures = document.getElementById('service-modal-features');
+
+if (serviceModal && serviceStrip) {
+  const openServiceModal = (serviceCard) => {
+    const titleNode = serviceCard.querySelector('h3');
+    const title = titleNode ? titleNode.textContent.trim() : 'Service';
+    const image = serviceCard.style.backgroundImage;
+    const badge = serviceCard.dataset.serviceBadge || 'Service';
+    const description = serviceCard.dataset.serviceDescription
+      || 'Explore this service with Travel Ceylon Tours.';
+    const features = (serviceCard.dataset.serviceFeatures || 'Local Support|Flexible Planning|Fast Response')
+      .split('|')
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    if (serviceModalKicker) {
+      serviceModalKicker.textContent = badge;
+    }
+    if (serviceModalTitle) {
+      serviceModalTitle.textContent = title;
+    }
+    if (serviceModalDesc) {
+      // If the description includes an "Available Languages:" clause,
+      // render the languages on a new line and highlight each language.
+      try {
+        const langMatch = /Available Languages:\s*(.+)$/i.exec(description);
+        if (langMatch) {
+          const langs = langMatch[1].split(',').map(s => s.trim()).filter(Boolean);
+          const langsHtml = langs.map(l => `<span class="lang">${l}</span>`).join(', ');
+          const descBase = description.replace(/Available Languages:\s*(.+)$/i, 'Available Languages:');
+          serviceModalDesc.innerHTML = `${escapeHtml(descBase)}<br><span class="lang-list">${langsHtml}</span>`;
+        } else {
+          serviceModalDesc.textContent = description;
+        }
+      } catch (e) {
+        serviceModalDesc.textContent = description;
+      }
+    }
+    if (serviceModalImage && image) {
+      serviceModalImage.style.backgroundImage = image;
+    }
+    if (serviceModalFeatures) {
+      serviceModalFeatures.innerHTML = features.map((feature) => `<li>${feature}</li>`).join('');
+    }
+
+    serviceModal.classList.add('is-open');
+    serviceModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('is-modal-open');
+  };
+
+  const closeServiceModal = () => {
+    serviceModal.classList.remove('is-open');
+    serviceModal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('is-modal-open');
+  };
+
+  serviceStrip.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0) {
+      return;
+    }
+
+    const serviceCard = event.target.closest('.svc-card');
+    if (serviceCard && serviceStrip.contains(serviceCard)) {
+      openServiceModal(serviceCard);
+    }
+  });
+
+  serviceStrip.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter' && event.key !== ' ') {
+      return;
+    }
+
+    const serviceCard = event.target.closest('.svc-card');
+    if (serviceCard && serviceStrip.contains(serviceCard)) {
+      event.preventDefault();
+      openServiceModal(serviceCard);
+    }
+  });
+
+  if (serviceModalClose) {
+    serviceModalClose.addEventListener('click', closeServiceModal);
+  }
+
+  serviceModal.addEventListener('click', (event) => {
+    if (event.target === serviceModal) {
+      closeServiceModal();
+    }
+  });
+
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && serviceModal.classList.contains('is-open')) {
+      closeServiceModal();
     }
   });
 }
@@ -677,7 +851,7 @@ if (destinationModal && destinationButtons.length) {
         'Carry water, sunscreen, and comfortable footwear.',
         'Start early to avoid crowds and midday heat.'
       ],
-      tip: 'Tip: Contact Shantha Tours for a guided day plan.'
+      tip: 'Tip: Contact Travel Ceylon Tours for a guided day plan.'
     };
 
     if (destinationModalTitle) {
@@ -1164,3 +1338,5 @@ if ('IntersectionObserver' in window && revealNodes.length) {
 } else {
   revealNodes.forEach((node) => node.classList.add('is-visible'));
 }
+
+

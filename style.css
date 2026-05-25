@@ -325,6 +325,48 @@ a {
   }
 }
 
+@keyframes navLinkRise {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (min-width: 761px) {
+  body.nav-load-ready .main-nav {
+    animation: navDropIn 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  body.nav-load-ready .main-nav a {
+    animation: navLinkRise 0.38s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+
+  body.nav-load-ready .main-nav a:nth-child(1) {
+    animation-delay: 0.08s;
+  }
+
+  body.nav-load-ready .main-nav a:nth-child(2) {
+    animation-delay: 0.14s;
+  }
+
+  body.nav-load-ready .main-nav a:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+
+  body.nav-load-ready .main-nav a:nth-child(4) {
+    animation-delay: 0.26s;
+  }
+
+  body.nav-load-ready .main-nav a:nth-child(5) {
+    animation-delay: 0.32s;
+  }
+}
+
 .header-tools {
   display: inline-flex;
   align-items: center;
@@ -393,38 +435,12 @@ main {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 50% 16%, rgba(246, 189, 105, 0.22), transparent 38%);
-  z-index: 1;
-  pointer-events: none;
-}
-
-.hero-showcase::after {
-  content: "";
-  position: absolute;
-  inset: -3%;
+  animation: heroRise 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   background-image: var(--hero-image);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transform: scale(1);
-  transform-origin: center center;
-  animation: heroZoom 18s ease-in-out infinite alternate;
-  will-change: transform;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.hero-content,
-.hero-gallery,
-.social-rail {
-  position: relative;
-  z-index: 2;
-}
-
-.hero-content > * {
-  opacity: 0;
-  transform: translateY(18px);
-  animation: heroRise 0.85s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  z-index: -1;
 }
 
 .hero-content .hero-kicker {
@@ -775,6 +791,57 @@ main {
   scroll-snap-type: x mandatory;
 }
 
+@keyframes svcFloat {
+  from { transform: translateX(-6px); }
+  to   { transform: translateX(6px); }
+}
+
+@media (min-width: 761px) {
+  .svc-card {
+    will-change: transform;
+    animation: svcFloat 4s ease-in-out infinite alternate;
+  }
+
+  .service-strip:hover .svc-card {
+    animation-play-state: paused;
+  }
+}
+
+/* Continuous marquee for service strip (desktop only) */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.service-strip {
+  position: relative;
+  overflow: hidden;
+}
+
+.service-track {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+  white-space: nowrap;
+}
+
+@media (min-width: 761px) {
+  .service-track.is-animating {
+    animation-name: marquee;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+  }
+
+  .service-strip:hover .service-track.is-animating {
+    animation-play-state: paused;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-track.is-animating { animation: none !important; }
+}
+
 .dest-search {
   margin-top: 1.25rem;
   display: flex;
@@ -884,6 +951,12 @@ main {
   padding: 1.1rem;
   scroll-snap-align: start;
   transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  cursor: pointer;
+}
+
+.svc-card:focus-visible {
+  outline: 2px solid #2bc9ff;
+  outline-offset: 3px;
 }
 
 .svc-card::before {
@@ -1197,6 +1270,21 @@ main {
   color: rgba(224, 232, 241, 0.88);
   font-size: 0.95rem;
   line-height: 1.45;
+}
+
+/* Highlighted language labels inside modal descriptions */
+.tour-modal-desc .lang-list {
+  display: inline-block;
+  margin-top: 0.35rem;
+}
+.tour-modal-desc .lang {
+  display: inline-block;
+  font-weight: 700;
+  background: rgba(226, 125, 74, 0.14);
+  color: #fff;
+  padding: 0.12rem 0.45rem;
+  border-radius: 0.35rem;
+  margin-right: 0.28rem;
 }
 
 .tour-modal-features {
@@ -2320,6 +2408,13 @@ main > section:not(.hero-showcase) {
     height: 15.2rem;
   }
 
+@media (prefers-reduced-motion: reduce) {
+  .svc-card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
   .activity-card {
     min-width: 12.8rem;
     min-height: 18.8rem;
@@ -2354,7 +2449,6 @@ main > section:not(.hero-showcase) {
   .moment-card {
     min-height: 15rem;
   }
-
   .review-modal-panel {
     width: min(93vw, 23rem);
     padding: 1rem;
