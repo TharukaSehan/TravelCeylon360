@@ -775,8 +775,7 @@ if (heroShowcase && heroGallery && heroPrev && heroNext && heroTiles.length) {
 
     const selectedImage = heroTiles[activeIndex].style.backgroundImage;
     if (selectedImage) {
-      heroShowcase.style.backgroundImage =
-        `linear-gradient(180deg, rgba(3, 8, 14, 0.08) 0%, rgba(3, 8, 14, 0.76) 100%), ${selectedImage}`;
+      heroShowcase.style.setProperty('--hero-image', selectedImage);
     }
 
     const activeTab = heroTiles[activeIndex];
