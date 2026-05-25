@@ -754,6 +754,128 @@ if (tourFilterButtons.length) {
   });
 }
 
+// Ensure service cards with missing images show a fallback
+(() => {
+  const svcCards = document.querySelectorAll('.svc-card[data-fallback]');
+  svcCards.forEach((card) => {
+    const bg = card.style.backgroundImage;
+    const urlMatch = bg && bg.match(/url\(["']?(.*?)["']?\)/);
+    const src = urlMatch ? urlMatch[1] : null;
+    const fallback = card.dataset.fallback;
+    if (!src) return;
+
+    const img = new Image();
+    img.onload = () => {
+      // image exists, nothing to do
+    };
+    img.onerror = () => {
+      card.style.backgroundImage = `url('${fallback}')`;
+    };
+    img.src = src;
+  });
+})();
+
+// Auto-scroll the service-strip from left to right and loop
+(() => {
+  const strip = document.querySelector('.service-strip');
+  if (!strip) return;
+
+  // pixels per second
+  const speed = 30;
+  let running = true;
+  let rafId = null;
+  let lastTimestamp = null;
+
+  const maxScroll = () => Math.max(0, strip.scrollWidth - strip.clientWidth);
+
+  // If items fit without overflow, duplicate content to allow visible auto-scroll
+  if (maxScroll() === 0) {
+    // Clone children once to create a scrollable strip
+    strip.innerHTML = strip.innerHTML + strip.innerHTML;
+  }
+
+  function step(ts) {
+    if (!lastTimestamp) lastTimestamp = ts;
+    const delta = (ts - lastTimestamp) / 1000;
+    lastTimestamp = ts;
+
+    if (running) {
+      strip.scrollLeft = Math.min(maxScroll(), strip.scrollLeft + speed * delta);
+      if (strip.scrollLeft >= maxScroll() - 0.5) {
+        // reached end — reset to start without visual jump by snapping
+        strip.scrollLeft = 0;
+      }
+    }
+
+    rafId = requestAnimationFrame(step);
+  }
+
+  // pause on pointer/keyboard interaction
+  const pause = () => { running = false; };
+  const resume = () => { running = true; lastTimestamp = null; };
+
+  strip.addEventListener('mouseenter', pause);
+  strip.addEventListener('mouseleave', resume);
+  strip.addEventListener('pointerdown', pause);
+  strip.addEventListener('pointerup', resume);
+  strip.addEventListener('focusin', pause);
+  strip.addEventListener('focusout', resume);
+
+  rafId = requestAnimationFrame(step);
+
+  // cleanup if needed (not used here but useful for SPA)
+  // return () => { cancelAnimationFrame(rafId); };
+})();
+
+// Destination search: filter .svc-card and .destination-card by input
+(() => {
+  const input = document.getElementById('destination-search');
+  if (!input) return;
+
+  const cardsSelector = '.svc-card, .destination-card';
+  const cards = () => Array.from(document.querySelectorAll(cardsSelector));
+
+  const normalize = (s) => (s || '').toString().trim().toLowerCase();
+
+  let debounceTimer = null;
+  const debounce = (fn, wait = 200) => {
+    return (...args) => {
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => fn(...args), wait);
+    };
+  };
+
+  const performSearch = () => {
+    const q = normalize(input.value);
+    let found = false;
+    cards().forEach((card) => {
+      const title = normalize((card.querySelector('h3') || {}).textContent);
+      const desc = normalize((card.querySelector('p') || {}).textContent);
+      const text = `${title} ${desc}`;
+      const match = q === '' || text.includes(q);
+      card.style.display = match ? '' : 'none';
+      if (match) found = true;
+    });
+
+    // show or remove no-results message
+    let noMsg = document.querySelector('.no-results');
+    if (!found && q !== '') {
+      if (!noMsg) {
+        noMsg = document.createElement('div');
+        noMsg.className = 'no-results';
+        noMsg.textContent = 'No destinations found.';
+        const section = document.getElementById('destinations');
+        if (section) section.appendChild(noMsg);
+      }
+    } else if (noMsg) {
+      noMsg.remove();
+    }
+  };
+
+  input.addEventListener('input', debounce(performSearch, 180));
+  // No entrance animation: search input will behave without scripted animations
+})();
+
 const heroShowcase = document.querySelector('.hero-showcase');
 const heroGallery = document.querySelector('.hero-gallery');
 const heroPrev = document.querySelector('.hero-gallery-prev');

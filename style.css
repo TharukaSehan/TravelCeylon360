@@ -775,6 +775,97 @@ main {
   scroll-snap-type: x mandatory;
 }
 
+.dest-search {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.destination-search-input {
+  width: min(38rem, 100%);
+  max-width: 100%;
+  padding: 0.65rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.03);
+  color: #f3f7fa;
+  font: inherit;
+  outline: none;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease;
+}
+
+.destination-search-input::placeholder {
+  color: rgba(243,246,250,0.6);
+}
+
+/* Header search styling for destinations page */
+.page-destinations .header-tools {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.45rem;
+}
+
+.page-destinations .header-search {
+  display: flex;
+  align-items: center;
+}
+
+.page-destinations .header-search .destination-search-input {
+  width: 20rem;
+  max-width: 38vw;
+  padding: 0.55rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid rgba(19,119,255,0.22);
+  background: rgba(255,255,255,0.96);
+  color: #0b1114;
+  font: inherit;
+  outline: none;
+  transition: box-shadow 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+}
+
+.page-destinations .search-input-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.page-destinations .search-icon {
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(11,17,20,0.5);
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+
+.page-destinations .header-search .destination-search-input {
+  padding-left: 2.4rem;
+}
+
+.page-destinations .header-search .destination-search-input::placeholder {
+  color: rgba(11,17,20,0.48);
+}
+
+@media (max-width: 980px) {
+  .page-destinations .header-search .destination-search-input {
+    width: 14rem;
+  }
+}
+/* kept only placeholder styling for destination search input; animations removed per request */
+
+.destination-search-input:focus {
+  box-shadow: 0 6px 18px rgba(24, 168, 255, 0.08);
+  border-color: rgba(37,200,255,0.45);
+}
+
+.no-results {
+  color: rgba(233,240,248,0.9);
+  margin-top: 1rem;
+  font-size: 0.98rem;
+}
+
 .svc-card {
   flex: 0 0 min(22.5vw, 17rem);
   min-width: 11rem;

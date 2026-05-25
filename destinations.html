@@ -360,7 +360,7 @@
     }
   </style>
 </head>
-<body class="is-loading">
+<body class="is-loading page-destinations">
   <div class="loading-screen" id="loading-screen" role="status" aria-live="polite" aria-label="Loading Shantha Tours">
     <div class="loader-brand" aria-hidden="true">
       <p class="loader-main">SHANTHA</p>
@@ -397,6 +397,15 @@
     <div class="header-tools">
       <button class="lang-pill" type="button">EN</button>
       <a href="https://wa.me/94777807055" target="_blank" rel="noopener" class="call-pill">CALL US</a>
+
+      <!-- Header search placed below Call button on Destinations page -->
+      <div class="header-search" style="margin-top:0.6rem; width:100%; display:flex; justify-content:flex-end;">
+        <label for="destination-search" class="visually-hidden">Search destinations</label>
+        <div class="search-input-wrap">
+          <span class="search-icon" aria-hidden="true"><i class="fa-solid fa-magnifying-glass"></i></span>
+          <input id="destination-search" class="destination-search-input" type="search" placeholder="Search destinations (e.g. Kandy, Ella, Galle)" aria-label="Search destinations" />
+        </div>
+      </div>
     </div>
   </header>
 
@@ -408,6 +417,7 @@
         <p>Explore the most beautiful and iconic locations across Sri Lanka</p>
       </div>
     </section>
+
 
     <!-- Beach & Coastal Areas -->
     <section class="destinations-section section-reveal" aria-label="Beach and coastal destinations">
