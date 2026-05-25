@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shantha Tours | Discover Sri Lanka</title>
+  <meta name="description" content="Shantha Tours crafts memorable Sri Lankan journeys with curated routes, trusted guides, and unforgettable experiences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="is-loading">
+  <div class="loading-screen" id="loading-screen" role="status" aria-live="polite" aria-label="Loading Shantha Tours">
+    <div class="loader-brand" aria-hidden="true">
+      <p class="loader-main">SHANTHA</p>
+      <p class="loader-sub">TOURS</p>
+      <span class="loader-line"></span>
+      <p class="loader-meta">LOADING EXPERIENCE</p>
+    </div>
+  </div>
+
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="#top">
+      <span class="brand-text">
+        <span class="brand-hot">SHANTHA</span>
+        <span class="brand-cool">TOURS</span>
+      </span>
+    </a>
+
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <a href="#home">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="#gallery">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-tools">
+      <button class="lang-pill" type="button">EN</button>
+      <a href="https://wa.me/94777807055" target="_blank" rel="noopener" class="call-pill">CALL US</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-showcase section-reveal" id="home" aria-label="Hero">
+      <div class="hero-content">
+        <p class="eyebrow hero-kicker">Shantha Tours Presents</p>
+        <h1>Start Your Dream Journey</h1>
+        <p class="lead">
+          Discover the unseen beauty of Sri Lanka with our premium guided tours.
+        </p>
+        <div class="hero-actions hero-actions-showcase">
+          <a href="#book" class="btn btn-hero">Explore Now</a>
+          <button class="watch-pill" type="button" aria-label="Watch video">
+            <span class="watch-icon">></span>
+            Watch Video
+          </button>
+        </div>
+      </div>
+
+      <div class="hero-gallery-wrap" aria-label="Featured locations">
+        <button class="hero-gallery-arrow hero-gallery-prev" type="button" aria-label="Previous image"><</button>
+        <div class="hero-gallery" id="gallery">
+          <article class="hero-tile hero-tile-active" style="background-image: url('assets/MH1.jpg')"></article>
+          <article class="hero-tile" style="background-image: url('assets/Mirissa-Beach.jpeg')"></article>
+          <article class="hero-tile" style="background-image: url('assets/MH2.jpg')"></article>
+          <article class="hero-tile" style="background-image: url('assets/MH4.jpg')"></article>
+          <article class="hero-tile" style="background-image: url('assets/MH4.jpg')"></article>
+        </div>
+        <button class="hero-gallery-arrow hero-gallery-next" type="button" aria-label="Next image">></button>
+      </div>
+
+      <div class="social-rail" aria-label="Social links">
+        <a href="#" class="social-link social-facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+        <a href="#" class="social-link social-instagram" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a href="#" class="social-link social-tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+      </div>
+    </section>
+
+    <section class="services-showcase section-reveal" id="destinations" aria-label="Premium experiences">
+      <p class="section-kicker">Travel With Us</p>
+      <h2>Premium Experiences</h2>
+      <p class="section-copy">We go beyond transportation. From luxury stays to expert local guidance, we handle every detail.</p>
+
+      <div class="service-strip">
+        <article class="svc-card" style="background-image: url('assets/SE11.jpg')">
+          <h3>Expert Chuerffers</h3>
+          <p>Friendly local guides</p>
+        </article>
+        <article class="svc-card" style="background-image: url('assets/SE2.png')">
+          <h3>Hotel Booking</h3>
+          <p>Best resorts and stays</p>
+        </article>
+        <article class="svc-card" style="background-image: url('assets/SE1.jpg')">
+          <h3>24/7 Support</h3>
+          <p>Anytime assistance</p>
+        </article>
+        <article class="svc-card" style="background-image: url('assets/SE3.jpg')">
+          <h3>Book Safari Tours</h3>
+          <p>Wildlife adventures</p>
+        </article>
+         <article class="svc-card" style="background-image: url('assets/SE5.jpg')">
+          <h3>Whale Watching Tours</h3>
+          <p>Wildlife adventures</p>
+        </article>
+      </div>
+
+      <a href="#packages" class="view-services">View All Services</a>
+      <p class="services-watermark" aria-hidden="true">Services</p>
+    </section>
+
+    <section class="tours-section section-reveal" id="packages" aria-label="Trending tours">
+      <p class="section-kicker">Best Of 2026</p>
+      <h2>Trending Tours</h2>
+
+      <div class="tour-filter" role="tablist" aria-label="Tour types">
+        <button class="is-active" type="button" role="tab" aria-selected="true">Individual / Couple</button>
+        <button type="button" role="tab" aria-selected="false">Family / Group</button>
+      </div>
+
+      <p class="section-copy">
+        Discover our sought-after travel experiences for 2026, designed for romantic getaways and group adventures across Sri Lanka.
+      </p>
+
+      <div class="tour-grid" id="gallery">
+        <article class="tour-card" style="background-image: url('assets/SE4.jpg')" data-tour-description="Experience the thrill of Yala with a guided jeep safari and a scenic hill-country transfer through Ella." data-tour-features="Luxury Safari Jeep|Expert Guide|Lunch Buffet">
+          <span class="tour-badge">1 Day Tour</span>
+          <h3>Yala National Park</h3>
+          <p>Yala Block 1</p>
+          <a href="#" class="tour-cta">Details</a>
+        </article>
+        <article class="tour-card" style="background-image: url('assets/MH4.jpg')" data-tour-description="Ride through tea-country rail views and waterfalls, then enjoy a curated adventure day around Ella." data-tour-features="Scenic Train Segment|Hill Country Viewpoints|Local Guide">
+          <span class="tour-badge">1 Day Tour</span>
+          <h3>Ella</h3>
+          <p>Udawalawa to Ella by rail</p>
+          <a href="#" class="tour-cta">Details</a>
+        </article>
+        <article class="tour-card" style="background-image: url('assets/Galle fort.jpg')" data-tour-description="Walk through iconic Dutch-era architecture, oceanfront promenades, and hidden heritage lanes in Galle." data-tour-features="Heritage Walk|Fort Museum Stops|Sunset Viewpoint">
+          <span class="tour-badge">2 Days Tour</span>
+          <h3>Galle City</h3>
+          <p>Fort and old streets</p>
+          <a href="#" class="tour-cta">Details</a>
+        </article>
+        <article class="tour-card" style="background-image: url('assets/sigiriya.jpg')" data-tour-description="Discover Sri Lanka's iconic rock fortress and cave temples with immersive storytelling and guided access." data-tour-features="Sigiriya Climb|Temple Visit|Private Driver">
+          <span class="tour-badge">1 Day Tour</span>
+          <h3>Sigiriya & Dambulla</h3>
+          <p>Rock and cave temple</p>
+          <a href="#" class="tour-cta">Details</a>
+        </article>
+        <article class="tour-card" style="background-image: url('assets/Kandy.jpg')" data-tour-description="Explore temple heritage, city viewpoints, and serene botanical gardens in Sri Lanka's sacred hill capital." data-tour-features="Temple of Tooth|Botanical Garden|City Tour">
+          <span class="tour-badge">1 Day Tour</span>
+          <h3>Kandy Sacred City</h3>
+          <p>Temple and botanical garden</p>
+          <a href="#" class="tour-cta">Details</a>
+        </article>
+        <article class="tour-card" style="background-image: url('assets/Whale watching Mirissa.jpg')" data-tour-description="Cruise along Mirissa's coast for unforgettable blue whale encounters with a comfortable guided boat experience." data-tour-features="Whale Cruise|Safety Gear|Breakfast Onboard">
+          <span class="tour-badge">1 Day Tour</span>
+          <h3>Whale Watching</h3>
+          <p>Mirissa coast cruise</p>
+          <a href="#" class="tour-cta">Details</a>
+        </article>
+        <article class="tour-card" style="background-image: url('assets/nuwarae.jpg')" data-tour-description="Enjoy misty mornings, tea estate landscapes, and classic colonial charm on this cool-climate mountain route." data-tour-features="Tea Factory Visit|Lake Walk|Mountain Scenic Drive">
+          <span class="tour-badge">2 Days Tour</span>
+          <h3>Nuwara Eliya Mist</h3>
+          <p>Tea country rail route</p>
+          <a href="#" class="tour-cta">Details</a>
+        </article>
+        <article class="tour-card" style="background-image: url('assets/colombo.jpg')" data-tour-description="Discover Colombo's vibrant contrast of modern skyline, historic markets, and sea-facing cultural landmarks." data-tour-features="Lotus Tower|Pettah Market Walk|Street Food Stop">
+          <span class="tour-badge">Half Day</span>
+          <h3>Colombo City Tour</h3>
+          <p>Lotus Tower and Pettah</p>
+          <a href="#" class="tour-cta">Details</a>
+        </article>
+      </div>
+    </section>
+
+    <div class="tour-modal" id="tour-modal" aria-hidden="true">
+      <div class="tour-modal-panel" role="dialog" aria-modal="true" aria-labelledby="tour-modal-title">
+        <button class="tour-modal-close" type="button" aria-label="Close tour details">×</button>
+        <div class="tour-modal-image" id="tour-modal-image"></div>
+        <div class="tour-modal-content">
+          <p class="tour-modal-kicker" id="tour-modal-kicker">Trending Tour</p>
+          <h3 id="tour-modal-title">Tour Title</h3>
+          <p class="tour-modal-desc" id="tour-modal-desc">Tour description</p>
+          <ul class="tour-modal-features" id="tour-modal-features"></ul>
+          <a href="contact.html" class="tour-modal-book">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <section class="activities-section section-reveal" id="experiences" aria-label="Premium activities">
+      <p class="section-kicker">Unforgettable Experiences</p>
+      <h2>Discover Our <span>Popular Activities</span></h2>
+      <p class="section-copy">Immerse yourself in Sri Lanka with thrilling adventures and relaxing beachside moments.</p>
+
+      <div class="activity-strip">
+        <article class="activity-card" style="background-image: url('assets/Hot air baloon ride.jpg')">
+          <span class="activity-tag">Aerial View</span>
+          <h3>Paramotoring Sky</h3>
+          <p>Fly above the golden coastline for a breathtaking view.</p>
+        </article>
+        <article class="activity-card" style="background-image: url('assets/elephant-riding.jpg')">
+          <span class="activity-tag">Relaxing</span>
+          <h3>Elephant Ride</h3>
+          <p>Experience the thrill of riding an elephant through the lush greenery.</p>
+        </article>
+        <article class="activity-card" style="background-image: url('assets/Surfing.jpg')">
+          <span class="activity-tag">Adventure</span>
+          <h3>Pro Surfing</h3>
+          <p>Catch perfect waves with beginner-friendly lessons.</p>
+        </article>
+        <article class="activity-card" style="background-image: url('assets/Madu River.jpg')">
+          <span class="activity-tag">Nature</span>
+          <h3>Mangrove Safari</h3>
+          <p>Explore tranquil mangroves with local wildlife guides.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="guest-reviews section-reveal" aria-label="What our guests say">
+      <div class="guest-media" style="background-image: url('assets/MH4.jpg')">
+        <div class="guest-media-pill">
+          <strong>100% Verified Reviews</strong>
+          <span>Real Travelers</span>
+        </div>
+      </div>
+
+      <div class="guest-content">
+        <p class="section-kicker">Traveler Stories</p>
+        <h2>What Our <span>Guests Say</span></h2>
+        <p class="section-copy">We take pride in creating unforgettable memories. Here is what travelers from around the world say about their journey with us.</p>
+
+        <div class="review-strip" aria-label="Guest comments">
+          <article class="review-card">
+            <div class="review-head">
+              <span class="review-avatar">D</span>
+              <div>
+                <h3>Dmitry Volkov</h3>
+                <p>Russia • 2 days ago</p>
+              </div>
+            </div>
+            <p class="review-stars">★★★★★</p>
+            <p class="review-copy">Excellent service and an organized route from the first day. Every detail was smooth and stress free.</p>
+          </article>
+
+          <article class="review-card">
+            <div class="review-head">
+              <span class="review-avatar">T</span>
+              <div>
+                <h3>Thomas Muller</h3>
+                <p>Germany • 1 week ago</p>
+              </div>
+            </div>
+            <p class="review-stars">★★★★★</p>
+            <p class="review-copy">Very clean vehicle, punctual driver, and perfect itinerary balance between culture and relaxation.</p>
+          </article>
+
+          <article class="review-card">
+            <div class="review-head">
+              <span class="review-avatar">A</span>
+              <div>
+                <h3>Aisha Nadeem</h3>
+                <p>UAE • 3 days ago</p>
+              </div>
+            </div>
+            <p class="review-stars">★★★★★</p>
+            <p class="review-copy">We felt safe and welcomed throughout the tour. The guide knew all the best places for photos and local food.</p>
+          </article>
+        </div>
+
+        <button class="review-action" type="button" data-open-review>Write a Review</button>
+      </div>
+    </section>
+
+    <div class="review-modal" id="review-modal" aria-hidden="true">
+      <div class="review-modal-panel" role="dialog" aria-modal="true" aria-labelledby="review-modal-title">
+        <button class="review-modal-close" type="button" aria-label="Close review form">×</button>
+        <h3 id="review-modal-title">Share Experience</h3>
+        <p class="review-modal-sub">Your feedback helps others plan their perfect trip.</p>
+
+        <form class="review-modal-form" novalidate>
+          <label>
+            Your Name
+            <input type="text" name="name" placeholder="e.g. John Doe" required />
+          </label>
+
+          <label>
+            Your Country
+            <input type="text" name="country" placeholder="e.g. USA" required />
+          </label>
+
+          <div class="review-rating-group" aria-label="Rating">
+            <p>Rating</p>
+            <div class="review-stars-input" role="radiogroup" aria-label="Rate your trip">
+              <button type="button" class="review-star is-active" data-star="1" aria-label="1 star">★</button>
+              <button type="button" class="review-star is-active" data-star="2" aria-label="2 stars">★</button>
+              <button type="button" class="review-star is-active" data-star="3" aria-label="3 stars">★</button>
+              <button type="button" class="review-star is-active" data-star="4" aria-label="4 stars">★</button>
+              <button type="button" class="review-star is-active" data-star="5" aria-label="5 stars">★</button>
+            </div>
+          </div>
+
+          <label>
+            Your Review
+            <textarea name="review" rows="5" placeholder="How was your trip..." required></textarea>
+          </label>
+
+          <button class="review-submit" type="submit">Publish Review</button>
+        </form>
+      </div>
+    </div>
+
+    <section class="captured-moments section-reveal" aria-label="Captured moments">
+      <div class="captured-head">
+        <p class="section-kicker">Gallery Highlights</p>
+        <h2>Captured Moments</h2>
+        <p class="section-copy">Explore the breathtaking beauty of Sri Lanka through our lens. Every photograph tells a story of adventure, culture, and serenity.</p>
+      </div>
+
+      <div class="moments-grid">
+        <article class="moment-card" style="background-image: url('momernts.jpeg')"></article>
+        <article class="moment-card" style="background-image: url('experiences.jpeg')"></article>
+        <article class="moment-card" style="background-image: url('premium activities.jpeg')"></article>
+        <article class="moment-card" style="background-image: url('main header.jpeg')"></article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <p class="footer-wordmark">SHANTHA TOURS</p>
+
+    <div class="footer-grid">
+      <section>
+        <h3>Explore Sri Lanka.</h3>
+        <p>We are your trusted gateway to unforgettable island adventures from highlands to golden beaches.</p>
+        <div class="footer-socials" aria-label="Social links">
+          <a href="#" class="social-link social-facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" class="social-link social-instagram" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" class="social-link social-tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+        </div>
+      </section>
+
+      <section>
+        <h4>Company</h4>
+        <a href="#home">Home</a>
+        <a href="#destinations">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="#gallery">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </section>
+
+      <section>
+        <h4>Support</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Booking Guide</a>
+      </section>
+
+      <section>
+        <h4>Get In Touch</h4>
+        <p>No. 21, Castel Lane, Kandy, Sri Lanka.</p>
+        <p>+94 77 780 7055</p>
+        <p>shanthatraders.businessmail@gmail.com</p>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Shantha Tours. All rights reserved.</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

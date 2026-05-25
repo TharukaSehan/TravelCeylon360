@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tour Packages | Shantha Tours</title>
+  <meta name="description" content="Explore curated tour packages in Sri Lanka. From beach escapes to cultural tours, 5-15 day private guided experiences." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .packages-hero {
+      min-height: 68vh;
+      position: relative;
+      display: grid;
+      align-items: center;
+      gap: 2rem;
+      padding: 8rem 5vw 3rem;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(4, 10, 16, 0.14) 0%, rgba(4, 10, 16, 0.78) 100%),
+        url("assets/MH4.jpg");
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    .packages-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 8% 8%, rgba(255, 152, 35, 0.38), transparent 45%),
+        radial-gradient(circle at 92% 12%, rgba(47, 206, 255, 0.32), transparent 48%);
+      pointer-events: none;
+    }
+
+    .packages-hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .packages-kicker {
+      color: #5ed3ff;
+      text-transform: uppercase;
+      letter-spacing: 0.26em;
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+
+    .packages-hero h1 {
+      font-family: "Anton", sans-serif;
+      text-transform: uppercase;
+      line-height: 0.94;
+      letter-spacing: 0.02em;
+      font-size: clamp(3.2rem, 9vw, 6.8rem);
+      max-width: 10ch;
+      text-shadow: 0 16px 40px rgba(0, 0, 0, 0.48);
+      margin-bottom: -0.5rem;
+    }
+
+    .packages-hero p {
+      max-width: 56ch;
+      color: rgba(235, 242, 250, 0.94);
+      font-size: 1.1rem;
+    }
+
+    .packages-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .packages-stat {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+    }
+
+    .packages-stat-num {
+      font-family: "Anton", sans-serif;
+      font-size: 1.9rem;
+      color: #ff8a1f;
+    }
+
+    .packages-stat-label {
+      font-size: 0.9rem;
+      color: rgba(240, 246, 252, 0.9);
+    }
+
+    .pricing-section {
+      padding: 3.5rem 5vw;
+      background: linear-gradient(180deg, rgba(6,10,16,0.88) 0%, rgba(6,10,16,0.95) 100%);
+      color: #e6eef2;
+      text-align: center;
+    }
+
+    .pricing-header {
+      max-width: 60ch;
+      margin: 0 auto 2.5rem;
+    }
+
+    .pricing-header .section-kicker {
+      color: #ff8a22;
+    }
+
+    .pricing-header h2 {
+      font-family: "Anton", sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+      margin-top: 0.5rem;
+    }
+
+    .pricing-header p {
+      color: var(--muted);
+      margin-top: 0.8rem;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      gap: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .price-card {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      box-shadow: 0 16px 36px rgba(23, 35, 31, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .price-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #ff8a1f, #0f766e);
+    }
+
+    .vehicle-image-wrap {
+      height: 8rem;
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(15, 118, 110, 0.04));
+      border-radius: 0.8rem;
+      display: grid;
+      place-items: center;
+      padding: 0.35rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(15, 118, 110, 0.15);
+      overflow: hidden;
+    }
+
+    .vehicle-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center center;
+      display: block;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    .vehicle-badge {
+      display: inline-block;
+      background: linear-gradient(140deg, #0f766e, #0a4d47);
+      color: #fff;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .price-breakdown {
+      background: rgba(15, 118, 110, 0.06);
+      border: 1px solid rgba(15, 118, 110, 0.12);
+      border-radius: 0.7rem;
+      padding: 0.7rem;
+      margin-bottom: 0.9rem;
+      font-size: 0.85rem;
+    }
+
+    .price-breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.35rem 0;
+      color: var(--muted);
+    }
+
+    .price-breakdown-row:not(:last-child) {
+      border-bottom: 1px solid rgba(15, 118, 110, 0.1);
+    }
+
+    .price-breakdown-label {
+      font-size: 0.8rem;
+    }
+
+    .price-breakdown-value {
+      font-weight: 600;
+      color: #0f766e;
+    }
+
+    .price-breakdown-total {
+      color: #ff8a1f;
+      font-weight: 700;
+    }
+
+    .price-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 48px rgba(23, 35, 31, 0.18);
+      border-color: #0f766e;
+    }
+
+    .price-card.featured {
+      border-color: #0f766e;
+      box-shadow: 0 0 0 1px rgba(15, 118, 110, 0.2), 0 24px 48px rgba(23, 35, 31, 0.18);
+      transform: scale(1.03);
+    }
+
+    .price-card.featured::after {
+      content: "MOST POPULAR";
+      position: absolute;
+      top: -8px;
+      right: 1rem;
+      background: linear-gradient(140deg, #ff9723, #ff6f00);
+      color: #fff;
+      padding: 0.3rem 0.8rem;
+      border-radius: 0 0 0.6rem 0.6rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .price-duration {
+      font-family: "Anton", sans-serif;
+      font-size: 1.8rem;
+      color: #0f766e;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.02em;
+    }
+
+    .price-duration span {
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-family: "Sora", sans-serif;
+    }
+
+    .price-label {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 0.8rem;
+    }
+
+    .price-amount {
+      font-family: "Anton", sans-serif;
+      font-size: 3rem;
+      color: #ff8a1f;
+      margin-bottom: 0.3rem;
+      line-height: 1;
+    }
+
+    .price-amount sup {
+      font-size: 1.2rem;
+      vertical-align: super;
+    }
+
+    .price-per {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    .price-features {
+      text-align: left;
+      margin: 1.2rem 0;
+      flex: 1;
+    }
+
+    .price-features ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .price-features li {
+      padding: 0.5rem 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .price-features li::before {
+      content: "✓";
+      color: #0f766e;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+
+    .price-features li:last-child {
+      border-bottom: none;
+    }
+
+    .price-card .btn {
+      margin-top: 1rem;
+      width: 100%;
+      justify-content: center;
+    }
+
+    .itineraries-section {
+      padding: 4rem 5vw 3rem;
+      background:
+        radial-gradient(circle at 10% 40%, rgba(14, 146, 186, 0.12), transparent 42%),
+        radial-gradient(circle at 95% 60%, rgba(14, 146, 186, 0.08), transparent 38%),
+        linear-gradient(180deg, rgba(6,10,16,0.9) 0%, rgba(6,10,16,0.98) 100%);
+      color: #dfeff6;
+    }
+
+    .itineraries-header {
+      text-align: center;
+      max-width: 65ch;
+      margin: 0 auto 2.5rem;
+    }
+
+    .itineraries-header .section-kicker {
+      color: #ff8a22;
+    }
+
+    .itineraries-header h2 {
+      font-family: "Anton", sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.8rem);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--ink);
+      margin-top: 0.5rem;
+    }
+
+    .itineraries-header p {
+      color: var(--muted);
+      margin-top: 0.8rem;
+    }
+
+    .itineraries-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
+      gap: 1.6rem;
+    }
+
+    .itinerary-card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 1.1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      height: 100%;
+    }
+
+    .itinerary-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 48px rgba(23, 35, 31, 0.15);
+    }
+
+    .itinerary-map-wrap {
+      position: relative;
+      height: 13.8rem;
+      background: linear-gradient(135deg, #d9effa, #b8e2f4);
+      display: grid;
+      place-items: center;
+      font-size: 3rem;
+      color: rgba(255, 255, 255, 0.4);
+      overflow: hidden;
+    }
+
+    .itinerary-map-image {
+      width: 112%;
+      height: 112%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+    }
+
+    .itinerary-badge {
+      position: absolute;
+      top: 0.8rem;
+      right: 0.8rem;
+      background: linear-gradient(140deg, #ff9723, #ff6f00);
+      color: #fff;
+      padding: 0.4rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 12px rgba(255, 151, 35, 0.28);
+      z-index: 2;
+    }
+
+    .itinerary-content {
+      padding: 1.3rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .itinerary-header-text {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .itinerary-days {
+      font-family: "Anton", sans-serif;
+      font-size: 1.2rem;
+      color: #ff8a1f;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .itinerary-days-num {
+      font-size: 1.5rem;
+      color: #0f766e;
+    }
+
+    .itinerary-title {
+      font-family: "Prata", serif;
+      font-size: 1.5rem;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .itinerary-highlights {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.8rem;
+    }
+
+    .itinerary-tag {
+      background: rgba(15, 118, 110, 0.1);
+      color: #0f766e;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .itinerary-description {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      flex: 1;
+      margin-bottom: 1rem;
+    }
+
+    .itinerary-route {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(15, 118, 110, 0.04));
+      border-left: 3px solid #0f766e;
+      padding: 0.8rem;
+      border-radius: 0.6rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+
+    .itinerary-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.3rem;
+      border-radius: 999px;
+      background: linear-gradient(140deg, #2fceff, #1377ff);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border: 0;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      text-decoration: none;
+      width: 100%;
+      text-align: center;
+    }
+
+    .itinerary-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(31, 119, 255, 0.3);
+    }
+
+    @media (max-width: 1024px) {
+      .itineraries-grid {
+        grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .packages-hero {
+        min-height: 62vh;
+        padding-top: 7rem;
+      }
+
+      .packages-stats {
+        gap: 1.4rem;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .price-card.featured {
+        transform: scale(1);
+      }
+
+      .itineraries-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .itinerary-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 112;
+      display: grid;
+      place-items: center;
+      background: rgba(6, 10, 16, 0.62);
+      backdrop-filter: blur(9px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .itinerary-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .itinerary-modal-panel {
+      width: min(94vw, 56rem);
+      max-height: min(88vh, 58rem);
+      border-radius: 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #131a22;
+      box-shadow: 0 28px 60px rgba(4, 8, 14, 0.52);
+      color: #edf3f8;
+      overflow: hidden;
+      transform: translateY(20px) scale(0.96);
+      opacity: 0;
+      transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .itinerary-modal.is-open .itinerary-modal-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .itinerary-modal-close {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      width: 1.95rem;
+      height: 1.95rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(11, 16, 23, 0.68);
+      color: rgba(236, 243, 249, 0.95);
+      font: inherit;
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .itinerary-modal-content {
+      padding: 1.8rem;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .itinerary-modal-layout {
+      display: grid;
+      grid-template-columns: minmax(16rem, 0.95fr) minmax(0, 1.25fr);
+      gap: 1.25rem;
+      align-items: start;
+    }
+
+    .itinerary-modal-left,
+    .itinerary-modal-right {
+      display: grid;
+      gap: 0.95rem;
+      align-content: start;
+    }
+
+    .itinerary-modal-header {
+      margin: 0;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .itinerary-modal-days {
+      font-family: "Anton", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-size: 0.85rem;
+      color: #ff8a1f;
+      font-weight: 700;
+    }
+
+    .itinerary-modal-title {
+      margin: 0;
+      font-family: "Anton", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 0.98;
+      font-size: clamp(1.8rem, 4.8vw, 2.8rem);
+      color: #fff;
+    }
+
+    .itinerary-modal-tags {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .itinerary-modal-tag {
+      background: linear-gradient(140deg, rgba(47, 206, 255, 0.2), rgba(19, 119, 255, 0.2));
+      border: 1px solid rgba(47, 206, 255, 0.4);
+      color: #5ed3ff;
+      padding: 0.35rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.73rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .itinerary-modal-description {
+      margin: 0;
+      color: rgba(221, 231, 240, 0.9);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    .itinerary-modal-map-wrap {
+      margin: 0;
+      border-radius: 0.8rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(12, 20, 28, 0.7);
+      width: 100%;
+    }
+
+    .itinerary-modal-map {
+      width: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: center;
+      aspect-ratio: 1 / 1;
+    }
+
+    .itinerary-modal-section-title {
+      margin: 0;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #ff8f23;
+      font-weight: 600;
+      margin-top: 0.4rem;
+    }
+
+    .itinerary-modal-route {
+      margin: 0;
+      padding: 0.9rem;
+      background: rgba(15, 118, 110, 0.12);
+      border-left: 3px solid #0f766e;
+      border-radius: 0.6rem;
+      font-size: 0.89rem;
+      color: rgba(195, 220, 215, 0.95);
+      line-height: 1.7;
+    }
+
+    .itinerary-modal-highlights {
+      margin: 0;
+      padding-left: 1rem;
+      display: grid;
+      gap: 0.5rem;
+      color: rgba(223, 232, 240, 0.9);
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .itinerary-modal-highlights li::before {
+      content: "→ ";
+      color: #2bc9ff;
+      font-weight: 700;
+      margin-right: 0.35rem;
+    }
+
+    .itinerary-modal-cta {
+      margin-top: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.7rem 1.6rem;
+      border-radius: 999px;
+      background: linear-gradient(140deg, #2fceff, #1377ff);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border: 0;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: fit-content;
+    }
+
+    .itinerary-modal-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(19, 119, 255, 0.35);
+    }
+
+    .itinerary-modal-map-link {
+      background: linear-gradient(140deg, #16b56d, #0d8f55);
+    }
+
+    .itinerary-modal-map-link:hover {
+      box-shadow: 0 10px 25px rgba(13, 143, 85, 0.35);
+    }
+
+    @media (max-width: 860px) {
+      .itinerary-modal-panel {
+        width: min(94vw, 28rem);
+        max-height: min(85vh, 35rem);
+      }
+
+      .itinerary-modal-content {
+        padding: 1.4rem;
+      }
+
+      .itinerary-modal-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .itinerary-modal-map-wrap {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="is-loading">
+  <div class="loading-screen" id="loading-screen" role="status" aria-live="polite" aria-label="Loading Shantha Tours">
+    <div class="loader-brand" aria-hidden="true">
+      <p class="loader-main">SHANTHA</p>
+      <p class="loader-sub">TOURS</p>
+      <span class="loader-line"></span>
+      <p class="loader-meta">LOADING EXPERIENCE</p>
+    </div>
+  </div>
+
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html">
+      <span class="brand-text">
+        <span class="brand-hot">SHANTHA</span>
+        <span class="brand-cool">TOURS</span>
+      </span>
+    </a>
+
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <a href="index.html#home">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-tools">
+      <button class="lang-pill" type="button">EN</button>
+      <a href="https://wa.me/94777807055" target="_blank" rel="noopener" class="call-pill">CALL US</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="packages-hero section-reveal" aria-label="Packages hero">
+      <div>
+        <p class="packages-kicker">Curated Sri Lanka Journeys</p>
+        <h1>Tour Packages For Every Traveler</h1>
+        <p>From private beach escapes to immersive cultural expeditions, our 5–15 day packages combine luxury, adventure, and local expertise.</p>
+        <div class="packages-stats">
+          <div class="packages-stat">
+            <span class="packages-stat-num">6</span>
+            <span class="packages-stat-label">Signature Packages</span>
+          </div>
+          <div class="packages-stat">
+            <span class="packages-stat-num">100%</span>
+            <span class="packages-stat-label">Customizable</span>
+          </div>
+          <div class="packages-stat">
+            <span class="packages-stat-num">5–15</span>
+            <span class="packages-stat-label">Days Duration</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pricing-section section-reveal" aria-label="Package pricing">
+      <div class="pricing-header">
+        <p class="section-kicker">Transparent Pricing</p>
+        <h2>Choose Your Package</h2>
+        <p>All-inclusive pricing includes accommodation, meals, guides, activities, and vehicle costs. No hidden fees. <strong>Sedan cars:</strong> €70/day (≤5 days), €55/day (>5 days). <strong>KDH vans:</strong> €95/day (<5 days), €85/day (≥5 days).</p>
+      </div>
+
+      <div class="pricing-grid">
+        <article class="price-card">
+          <span class="vehicle-badge">🚗 Sedan Car</span>
+          <div class="vehicle-image-wrap">
+            <img src="assets/sedan.jpg" alt="Sedan car" loading="lazy" />
+          </div>
+          <div class="price-duration">5 <span>DAYS</span></div>
+          <div class="price-label">From Per Day</div>
+          <div class="price-amount"><sup>€</sup>70</div>
+          <div class="price-breakdown">
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label">Base Package</span>
+              <span class="price-breakdown-value">€350</span>
+            </div>
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label">Vehicle (€70/day × 5)</span>
+              <span class="price-breakdown-value">€350</span>
+            </div>
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label"><strong>Total</strong></span>
+              <span class="price-breakdown-total">€350</span>
+            </div>
+          </div>
+          <ul class="price-features">
+            <li>Private chauffeur</li>
+            <li>Vehicle</li>
+            <li>24/7 support</li>
+          </ul>
+          <a href="contact.html" class="btn">Inquire Now</a>
+        </article>
+
+        <article class="price-card">
+          <span class="vehicle-badge">🚗 Sedan Car</span>
+          <div class="vehicle-image-wrap">
+            <img src="assets/sedan.jpg" alt="Sedan car" loading="lazy" />
+          </div>
+          <div class="price-duration">6-10 <span>DAYS</span></div>
+          <div class="price-label">From Per Day</div>
+          <div class="price-amount"><sup>€</sup>55</div>
+          <div class="price-breakdown">
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label">Base Package for 10 days</span>
+              <span class="price-breakdown-value">€550</span>
+            </div>
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label">Vehicle (€55/day × 10)</span>
+              <span class="price-breakdown-value">€550</span>
+            </div>
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label"><strong>Total</strong></span>
+              <span class="price-breakdown-total">€550</span>
+            </div>
+          </div>
+          <ul class="price-features">
+            <li>Private chauffeur</li>
+            <li>Vehicle</li>
+            <li>24/7 support</li>
+          </ul>
+          <a href="contact.html" class="btn">Inquire Now</a>
+        </article>
+
+        <article class="price-card featured">
+          <span class="vehicle-badge">🚐 KDH Van</span>
+          <div class="vehicle-image-wrap">
+            <img src="assets/van.jpg" alt="KDH van" loading="lazy" />
+          </div>
+          <div class="price-duration">5-10 <span>DAYS</span></div>
+          <div class="price-label">From Per Day</div>
+          <div class="price-amount"><sup>€</sup>85</div>
+          <div class="price-breakdown">
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label">Base Package</span>
+              <span class="price-breakdown-value">€850</span>
+            </div>
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label">Vehicle (€85/day × 10)</span>
+              <span class="price-breakdown-value">€850</span>
+            </div>
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label"><strong>Total</strong></span>
+              <span class="price-breakdown-total">€850</span>
+            </div>
+          </div>
+          <ul class="price-features">
+            <li>Private chauffeur</li>
+            <li>24/7 dedicated support</li>
+          </ul>
+          <a href="contact.html" class="btn">Inquire Now</a>
+        </article>
+
+        <article class="price-card">
+          <span class="vehicle-badge">🚐 KDH Van</span>
+          <div class="vehicle-image-wrap">
+            <img src="assets/van.jpg" alt="KDH van" loading="lazy" />
+          </div>
+          <div class="price-duration">5 <span>DAYS</span></div>
+          <div class="price-label">From Per Person</div>
+          <div class="price-amount"><sup>€</sup>95</div>
+          <div class="price-breakdown">
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label">Base Package</span>
+              <span class="price-breakdown-value">€475</span>
+            </div>
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label">Vehicle (€95/day × 5)</span>
+              <span class="price-breakdown-value">€475</span>
+            </div>
+            <div class="price-breakdown-row">
+              <span class="price-breakdown-label"><strong>Total</strong></span>
+              <span class="price-breakdown-total">€475</span>
+            </div>
+          </div>
+          <ul class="price-features">
+            <li>Private  chauffeur</li>
+            <li>24/7 dedicated support</li>
+          </ul>
+          <a href="contact.html" class="btn">Inquire Now</a>
+        </article>
+
+        
+      </div>
+    </section>
+
+    <section class="itineraries-section section-reveal" aria-label="Famous routes and itineraries">
+      <div class="itineraries-header">
+        <p class="section-kicker">Popular Routes</p>
+        <h2>Famous Itineraries</h2>
+        <p>Carefully crafted routes combining the best attractions, hidden gems, and authentic experiences across Sri Lanka.</p>
+      </div>
+
+      <div class="itineraries-grid">
+        <article class="itinerary-card">
+          <div class="itinerary-map-wrap">
+            <div class="itinerary-badge">8 DAYS</div>
+            <img class="itinerary-map-image" src="assets/sl-map-route1.png" alt="Coastal Paradise route map" loading="lazy" />
+          </div>
+          <div class="itinerary-content">
+            <div class="itinerary-header-text">
+              <span class="itinerary-days">TOUR</span>
+              <span class="itinerary-days-num">8 DAYS</span>
+            </div>
+            <h3 class="itinerary-title">Coastal Paradise</h3>
+            <div class="itinerary-highlights">
+              <span class="itinerary-tag">Beach</span>
+              <span class="itinerary-tag">Wildlife</span>
+              <span class="itinerary-tag">Culture</span>
+            </div>
+            <p class="itinerary-description">Experience pristine beaches, whale watching, and iconic landmarks. A perfect blend of relaxation and adventure.</p>
+            <div class="itinerary-route">
+              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Nuwaraeliya ⇨ Ella ⇨ Yala ⇨ Mirissa ⇨ Galle ⇨ Benthota ⇨ Colombo
+            </div>
+            <a href="contact.html" class="itinerary-cta">View Details</a>
+          </div>
+        </article>
+
+        <article class="itinerary-card">
+          <div class="itinerary-map-wrap">
+            <div class="itinerary-badge">10 DAYS</div>
+            <img class="itinerary-map-image" src="assets/sl-map-route2.png" alt="Complete Island Tour route map" loading="lazy" />
+          </div>
+          <div class="itinerary-content">
+            <div class="itinerary-header-text">
+              <span class="itinerary-days">TOUR</span>
+              <span class="itinerary-days-num">10 DAYS</span>
+            </div>
+            <h3 class="itinerary-title">Complete Island Tour</h3>
+            <div class="itinerary-highlights">
+              <span class="itinerary-tag">Comprehensive</span>
+              <span class="itinerary-tag">All Regions</span>
+            </div>
+            <p class="itinerary-description">Visit all major attractions across Sri Lanka. From highlands to coast, covering beaches, temples, and wildlife sanctuaries.</p>
+            <div class="itinerary-route">
+              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Dambulla ⇨ Polonnaruwa ⇨ Negombo ⇨ Nuwaraeliya ⇨ Ella ⇨ Mirissa ⇨ Galle ⇨ Colombo
+            </div>
+            <a href="contact.html" class="itinerary-cta">View Details</a>
+          </div>
+        </article>
+
+        <article class="itinerary-card">
+          <div class="itinerary-map-wrap">
+            <div class="itinerary-badge">5 DAYS</div>
+            <img class="itinerary-map-image" src="assets/sl-map-route3.png" alt="Cultural Heritage route map" loading="lazy" />
+          </div>
+          <div class="itinerary-content">
+            <div class="itinerary-header-text">
+              <span class="itinerary-days">TOUR</span>
+              <span class="itinerary-days-num">5 DAYS</span>
+            </div>
+            <h3 class="itinerary-title">Cultural Heritage</h3>
+            <div class="itinerary-highlights">
+              <span class="itinerary-tag">Culture</span>
+              <span class="itinerary-tag">History</span>
+            </div>
+            <p class="itinerary-description">Immerse in Sri Lanka's rich cultural heritage. Ancient temples, UNESCO sites, and traditional villages await exploration.</p>
+            <div class="itinerary-route">
+              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Polonnaruwa ⇨ Trincomalee ⇨ Anuradhapura ⇨ Negombo ⇨ Colombo
+            </div>
+            <a href="contact.html" class="itinerary-cta">View Details</a>
+          </div>
+        </article>
+
+        <article class="itinerary-card">
+          <div class="itinerary-map-wrap">
+            <div class="itinerary-badge">12 DAYS</div>
+            <img class="itinerary-map-image" src="assets/sl-map-route5.png" alt="Adventure and Safari route map" loading="lazy" />
+          </div>
+          <div class="itinerary-content">
+            <div class="itinerary-header-text">
+              <span class="itinerary-days">TOUR</span>
+              <span class="itinerary-days-num">12 DAYS</span>
+            </div>
+            <h3 class="itinerary-title">Adventure & Safari</h3>
+            <div class="itinerary-highlights">
+              <span class="itinerary-tag">Adventure</span>
+              <span class="itinerary-tag">Wildlife</span>
+            </div>
+            <p class="itinerary-description">Thrilling safari experiences combined with hiking and water sports. Perfect for adventure seekers seeking adrenaline-pumping activities.</p>
+            <div class="itinerary-route">
+              <strong>Route:</strong> Airport ⇨ Dambulla ⇨ Yala Safari ⇨ Udawalava ⇨ Climb Adam's Peak ⇨ Ella Hiking ⇨ Mirissa Surfing ⇨ Galle
+            </div>
+            <a href="contact.html" class="itinerary-cta">View Details</a>
+          </div>
+        </article>
+
+        <article class="itinerary-card">
+          <div class="itinerary-map-wrap">
+            <div class="itinerary-badge">15 DAYS</div>
+            <img class="itinerary-map-image" src="assets/sri-lankan-travel-map.png" alt="Ultimate Sri Lanka route map" loading="lazy" />
+          </div>
+          <div class="itinerary-content">
+            <div class="itinerary-header-text">
+              <span class="itinerary-days">TOUR</span>
+              <span class="itinerary-days-num">15 DAYS</span>
+            </div>
+            <h3 class="itinerary-title">Ultimate Sri Lanka</h3>
+            <div class="itinerary-highlights">
+              <span class="itinerary-tag">Premium</span>
+              <span class="itinerary-tag">Luxury</span>
+            </div>
+            <p class="itinerary-description">The complete Sri Lankan experience. Luxury accommodations, private experiences, and exclusive access to hidden locations.</p>
+            <div class="itinerary-route">
+              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Nuwaraeliya ⇨ Ella ⇨ Udawalava ⇨ Yala ⇨ Mirissa ⇨ Bentota ⇨ Galle ⇨ Sigiriya ⇨ Colombo
+            </div>
+            <a href="contact.html" class="itinerary-cta">View Details</a>
+          </div>
+        </article>
+
+        <article class="itinerary-card">
+          <div class="itinerary-map-wrap">
+            <div class="itinerary-badge">11 DAYS</div>
+            <img class="itinerary-map-image" src="assets/Sri Lanka Map.png" alt="North and East Explorer route map" loading="lazy" />
+          </div>
+          <div class="itinerary-content">
+            <div class="itinerary-header-text">
+              <span class="itinerary-days">TOUR</span>
+              <span class="itinerary-days-num">11 DAYS</span>
+            </div>
+            <h3 class="itinerary-title">North & East Explorer</h3>
+            <div class="itinerary-highlights">
+              <span class="itinerary-tag">Exploration</span>
+              <span class="itinerary-tag">Authentic</span>
+            </div>
+            <p class="itinerary-description">Discover the less-traveled northern and eastern regions. Pristine beaches, quiet towns, and authentic cultural interactions.</p>
+            <div class="itinerary-route">
+              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Dambulla ⇨ Anuradhapura ⇨ Jaffna ⇨ Trincomalee ⇨ Arugambe ⇨ Colombo
+            </div>
+            <a href="contact.html" class="itinerary-cta">View Details</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="itinerary-modal" id="itinerary-modal" aria-hidden="true">
+      <div class="itinerary-modal-panel" role="dialog" aria-modal="true" aria-labelledby="itinerary-modal-title">
+        <button class="itinerary-modal-close" type="button" aria-label="Close itinerary details">×</button>
+        <div class="itinerary-modal-content">
+          <div class="itinerary-modal-layout">
+            <div class="itinerary-modal-left">
+              <h4 class="itinerary-modal-section-title">Sri Lanka Route Map</h4>
+              <figure class="itinerary-modal-map-wrap">
+                <img class="itinerary-modal-map" id="itinerary-modal-map-image" src="assets/sl-map-route1.png" alt="Sri Lanka route map" loading="lazy" />
+              </figure>
+              <a class="itinerary-modal-cta itinerary-modal-map-link" id="itinerary-modal-map-link" href="https://www.google.com/maps" target="_blank" rel="noopener">Open Route In Google Maps</a>
+            </div>
+
+            <div class="itinerary-modal-right">
+              <div class="itinerary-modal-header">
+                <p class="itinerary-modal-days" id="itinerary-modal-days">TOUR</p>
+                <h3 id="itinerary-modal-title">Itinerary Title</h3>
+                <div class="itinerary-modal-tags" id="itinerary-modal-tags"></div>
+              </div>
+              <p class="itinerary-modal-description" id="itinerary-modal-description">Description here</p>
+              <div>
+                <h4 class="itinerary-modal-section-title">Route Highlights</h4>
+                <p class="itinerary-modal-route" id="itinerary-modal-route">Route here</p>
+              </div>
+              <div>
+                <h4 class="itinerary-modal-section-title">What's Included</h4>
+                <ul class="itinerary-modal-highlights" id="itinerary-modal-included"></ul>
+              </div>
+              <a class="itinerary-modal-cta" href="https://wa.me/94777807055" target="_blank" rel="noopener">Book Now On WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <p class="footer-wordmark">SHANTHA TOURS</p>
+
+    <div class="footer-grid">
+      <section>
+        <h3>Explore Sri Lanka.</h3>
+        <p>We are your trusted gateway to unforgettable island adventures from highlands to golden beaches.</p>
+        <div class="footer-socials" aria-label="Social links">
+          <a href="#" class="social-link social-facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" class="social-link social-instagram" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" class="social-link social-tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+        </div>
+      </section>
+
+      <section>
+        <h4>Company</h4>
+        <a href="index.html#home">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </section>
+
+      <section>
+        <h4>Support</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Booking Guide</a>
+      </section>
+
+      <section>
+        <h4>Get In Touch</h4>
+        <p>No. 21, Castel Lane, Kandy, Sri Lanka.</p>
+        <p>+94 77 780 7055</p>
+        <p>shanthatraders.businessmail@gmail.com</p>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Shantha Tours. All rights reserved.</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

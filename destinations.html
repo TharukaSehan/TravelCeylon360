@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destinations | Shantha Tours</title>
+  <meta name="description" content="Explore famous destinations in Sri Lanka with Shantha Tours. Discover beaches, wildlife, mountains, and historic sites." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@300;400;500;600;700&family=Prata&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .destinations-hero {
+      min-height: 60vh;
+      position: relative;
+      display: grid;
+      align-items: center;
+      padding: 7.5rem 5vw 3.2rem;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(3, 8, 14, 0.08) 0%, rgba(3, 8, 14, 0.76) 100%),
+        url("assets/MH4.jpg");
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .destinations-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 16%, rgba(246, 189, 105, 0.22), transparent 38%);
+    }
+
+    .destinations-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 60ch;
+      margin: 0 auto;
+    }
+
+    .destinations-hero h1 {
+      font-family: "Anton", sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      letter-spacing: 0.01em;
+      line-height: 0.95;
+      text-transform: capitalize;
+      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      margin-bottom: 1rem;
+    }
+
+    .destinations-hero p {
+      font-size: 1rem;
+      color: rgba(243, 246, 250, 0.9);
+    }
+
+    .destinations-section {
+      padding: 4.5rem 5vw 3.2rem;
+      background: var(--bg);
+    }
+
+    .destination-category-title {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .destination-category-title h2 {
+      font-family: "Prata", serif;
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .destination-category-title .category-subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .destination-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .destination-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(23, 35, 31, 0.15);
+    }
+
+    .destination-card-image {
+      width: 100%;
+      height: 12rem;
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    .destination-card-content {
+      padding: 1.3rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .destination-card h3 {
+      font-family: "Prata", serif;
+      font-size: 1.4rem;
+      color: var(--ink);
+      margin: 0 0 0.5rem 0;
+    }
+
+    .destination-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0 0 1.2rem 0;
+      flex: 1;
+      line-height: 1.5;
+    }
+
+    .destination-card-btn {
+      display: inline-block;
+      background: linear-gradient(140deg, #2fceff, #1377ff);
+      color: #fff;
+      padding: 0.7rem 1.5rem;
+      border-radius: 999px;
+      border: 0;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      text-align: center;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      width: fit-content;
+    }
+
+    .destination-card-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(31, 119, 255, 0.3);
+    }
+
+    .destinations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+      gap: 1.3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .destinations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .destinations-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1280px) {
+      .destinations-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .destinations-section:nth-child(odd) {
+      background: linear-gradient(135deg, #f9f5ee 0%, #f3f8f5 100%);
+    }
+
+    .destinations-section:nth-child(even) {
+      background: #fff;
+    }
+
+    .destination-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 112;
+      display: grid;
+      place-items: center;
+      background: rgba(6, 10, 16, 0.62);
+      backdrop-filter: blur(9px);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .destination-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .destination-modal-panel {
+      width: min(94vw, 54rem);
+      max-height: min(88vh, 52rem);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background: #131a22;
+      box-shadow: 0 28px 60px rgba(4, 8, 14, 0.52);
+      color: #edf3f8;
+      overflow: hidden;
+      transform: translateY(20px) scale(0.96);
+      opacity: 0;
+      transition: transform 0.38s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.3s ease;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      position: relative;
+    }
+
+    .destination-modal.is-open .destination-modal-panel {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .destination-modal-close {
+      position: absolute;
+      top: 0.65rem;
+      right: 0.65rem;
+      width: 1.95rem;
+      height: 1.95rem;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(11, 16, 23, 0.68);
+      color: rgba(236, 243, 249, 0.95);
+      font: inherit;
+      font-size: 1.15rem;
+      line-height: 1;
+      cursor: pointer;
+      z-index: 2;
+    }
+
+    .destination-modal-image {
+      min-height: 19rem;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .destination-modal-image::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(4, 8, 12, 0.08), rgba(4, 8, 12, 0.62));
+    }
+
+    .destination-modal-content {
+      padding: 1.25rem 1.2rem 1.1rem;
+      display: grid;
+      align-content: start;
+      gap: 0.7rem;
+      overflow-y: auto;
+    }
+
+    .destination-modal-content h3 {
+      margin: 0;
+      font-family: "Anton", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 0.98;
+      font-size: clamp(1.7rem, 4.4vw, 2.5rem);
+    }
+
+    .destination-modal-copy {
+      margin: 0;
+      color: rgba(221, 231, 240, 0.9);
+      font-size: 0.93rem;
+      line-height: 1.55;
+    }
+
+    .destination-modal-meta {
+      margin: 0;
+      display: grid;
+      gap: 0.4rem;
+      padding: 0.72rem;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 0.7rem;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .destination-modal-meta p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: rgba(221, 231, 240, 0.92);
+    }
+
+    .destination-modal-meta strong {
+      color: #55d6ff;
+    }
+
+    .destination-modal-content h4 {
+      margin: 0.2rem 0 0;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #ff8f23;
+      font-family: "Sora", sans-serif;
+    }
+
+    .destination-modal-list {
+      margin: 0;
+      padding-left: 1rem;
+      display: grid;
+      gap: 0.45rem;
+      color: rgba(223, 232, 240, 0.9);
+      font-size: 0.86rem;
+      line-height: 1.5;
+    }
+
+    .destination-modal-tip {
+      margin: 0.1rem 0 0;
+      font-size: 0.82rem;
+      color: #9ad9ff;
+    }
+
+    .destination-modal-map {
+      margin-top: 0.2rem;
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.62rem 1rem;
+      border-radius: 999px;
+      background: linear-gradient(140deg, #2fceff, #1377ff);
+      color: #fff;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      border: 0;
+      text-decoration: none;
+    }
+
+    .destination-modal-map:hover {
+      box-shadow: 0 10px 20px rgba(19, 119, 255, 0.28);
+    }
+
+    @media (max-width: 860px) {
+      .destination-modal-panel {
+        width: min(94vw, 28rem);
+        grid-template-columns: 1fr;
+      }
+
+      .destination-modal-image {
+        min-height: 11.5rem;
+      }
+
+      .destination-modal-content {
+        max-height: min(65vh, 27rem);
+      }
+    }
+  </style>
+</head>
+<body class="is-loading">
+  <div class="loading-screen" id="loading-screen" role="status" aria-live="polite" aria-label="Loading Shantha Tours">
+    <div class="loader-brand" aria-hidden="true">
+      <p class="loader-main">SHANTHA</p>
+      <p class="loader-sub">TOURS</p>
+      <span class="loader-line"></span>
+      <p class="loader-meta">LOADING EXPERIENCE</p>
+    </div>
+  </div>
+
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html">
+      <span class="brand-text">
+        <span class="brand-hot">SHANTHA</span>
+        <span class="brand-cool">TOURS</span>
+      </span>
+    </a>
+
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <a href="index.html#home">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="index.html#gallery">Gallery</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-tools">
+      <button class="lang-pill" type="button">EN</button>
+      <a href="https://wa.me/94777807055" target="_blank" rel="noopener" class="call-pill">CALL US</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="destinations-hero" aria-label="Destinations Hero">
+      <div class="destinations-hero-content">
+        <h1>Famous Destinations</h1>
+        <p>Explore the most beautiful and iconic locations across Sri Lanka</p>
+      </div>
+    </section>
+
+    <!-- Beach & Coastal Areas -->
+    <section class="destinations-section section-reveal" aria-label="Beach and coastal destinations">
+      <div class="destination-category-title">
+        <h2>Beach & Coastal Areas</h2>
+        <p class="category-subtitle">Experience pristine beaches and coastal beauty</p>
+      </div>
+      
+      <div class="destinations-grid">
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Mirissa-Beach.jpeg')"></div>
+          <div class="destination-card-content">
+            <h3>Mirissa</h3>
+            <p>Mirissa is a famous travel destination located in the Southern coast of Sri Lanka. Famous for its scenic beach side locations and activities related with whale and dolphin watching, snorkelling and sea turtle hatcheries.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Arugambay.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Arugambay</h3>
+            <p>Arugambay is a famous travel destination located in the Eastern coast of Sri Lanka. Famous for beach surfing and many more activities like snorkelling, boat rides and water sports.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/tangalle.jpeg')"></div>
+          <div class="destination-card-content">
+            <h3>Tangalle</h3>
+            <p>Tangalle is a famous travel destination located in the southern coast of Sri Lanka. Famous for beach surfing and many more water sports activities.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Bentota.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Benthota</h3>
+            <p>Benthota is a famous travel destination located in the Western coast of Sri Lanka. Famous for scenic beach and relaxation activities.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/uppuveli.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Uppuveli</h3>
+            <p>Uppuveli is a famous beach located in the eastern coast of Sri Lanka, near to Trincomalee city. Famous for beach relaxing and many water sports activities.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Trincomalee.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Trincomalee</h3>
+            <p>Uppuveli is a famous beach located in the eastern coast of Sri Lanka, near to Trincomalee city. Famous for beach relaxing and many water sports activities.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/unawatuna.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Unawatuna</h3>
+            <p>Unawatuna is a famous beach located in the southern coast of Sri Lanka, near to Galle city. Famous for beach relaxing and many  activities.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/hiriketiya.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Hirakatiya</h3>
+            <p>Hirakatiya is a famous beach located in the southern coast of Sri Lanka, near to Matara city. Famous for beach relaxing and many  activities.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Cultural Heritage -->
+    <section class="destinations-section section-reveal" aria-label="Cultural heritage destinations">
+      <div class="destination-category-title">
+        <h2>Cultural Heritage</h2>
+        <p class="category-subtitle">Immerse in Sri Lanka's rich history and culture</p>
+      </div>
+      
+      <div class="destinations-grid">
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Galle fort.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Galle Fort</h3>
+            <p>Galle Fort is a famous travel destination located in the Southern coast of Sri Lanka. Famous for its old architecture and historical sites.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/sigiriya.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Sigiriya</h3>
+            <p>Sigiriya is a famous travel destination located in the North central part of Sri Lanka. Sigiriya is more famous to its rich cultural history and scenic views.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Kandy.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Kandy</h3>
+            <p>Kandy is a famous travel destination located in the central part of Sri Lanka. Sigiriya is more famous to its cultural history, ancient temple and botanical garden.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Ella.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Ella</h3>
+            <p>Ella is a famous travel destination located in the hillcountry side of Sri Lanka to its rich cultural history and scenic views. Ella is more famous for watching elephants and leopards.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/nuwarae.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Nuwara Eliya</h3>
+            <p>Nuwara Eliya is a famous travel destination located in the central Hillcountry central part of Sri Lanka. Nuwara Eliya is more famous for watching tea plantations and scenic mountain routes.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Polonaruwa.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Polonaruwa</h3>
+            <p>Polonaruwa is a famous travel destination located in the North central part of Sri Lanka. It is more famous for its historical and archeological sites with rich cultural heritage.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Anuradhapura.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Anuradhapura</h3>
+            <p>Anuradhapura is one of Sri Lanka's ancient capitals and a sacred city of Buddhist pilgrimage. Famous for its ancient temples, stupas, and archaeological sites that date back over 2000 years.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/jaffna.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Jaffna</h3>
+            <p>Jaffna is a historic city located in the northern peninsula of Sri Lanka. Famous for its unique culture, heritage sites, Portuguese architecture, ancient temples, and vibrant local traditions.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Wildlife & Safari -->
+    <section class="destinations-section section-reveal" aria-label="Wildlife and safari destinations">
+      <div class="destination-category-title">
+        <h2>Wildlife & Safari</h2>
+        <p class="category-subtitle">Discover the wild heart of Sri Lanka</p>
+      </div>
+      
+      <div class="destinations-grid">
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/yala.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Yala</h3>
+            <p>Yala is a famous National park located in the Southeast part of the country. Yala is more famous for watching elephants and leopards. Udawalava is more famous for watching elephants.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Udawalava.jpg')"></div>
+          <div class="destination-card-content">
+            <h3>Udawalava</h3>
+            <p>Udawalava National Park is a famous National park located in the Central part of the country. Udawalava is more famous for watching elephants.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('assets/Wasgamuwa.jpeg')"></div>
+          <div class="destination-card-content">
+            <h3>Wasgamuwa</h3>
+            <p>Wasgamuwa National Park is a natural park located in the Middle and Polonnaruwa districts. Famous for watching elephants and other wild animals.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Mountain Hiking -->
+    <section class="destinations-section section-reveal" aria-label="Mountain hiking destinations">
+      <div class="destination-category-title">
+        <h2>Mountain Hiking</h2>
+        <p class="category-subtitle">Challenge yourself with scenic mountain trails</p>
+      </div>
+      
+      <div class="destinations-grid">
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop')"></div>
+          <div class="destination-card-content">
+            <h3>Little Adams Peak</h3>
+            <p>Little Adams Peak is located in near to Ella. It is an easy hiking destination located in the hillcountry side of Sri Lanka.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop')"></div>
+          <div class="destination-card-content">
+            <h3>Pidurangala Rock</h3>
+            <p>Pidurangala Rock is a famous travel destination located in the hillcountry side of Sri Lanka. It has lot of scenic views.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+
+        <article class="destination-card">
+          <div class="destination-card-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop')"></div>
+          <div class="destination-card-content">
+            <h3>Adams Peak</h3>
+            <p>Adams Peak is located in the central hillcountry. Adams Peak is a famous holy mountain and hiking destination that offers stunning views at sunrise.</p>
+            <a href="#" class="destination-card-btn">Read More</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <div class="destination-modal" id="destination-modal" aria-hidden="true">
+      <div class="destination-modal-panel" role="dialog" aria-modal="true" aria-labelledby="destination-modal-title">
+        <button class="destination-modal-close" type="button" aria-label="Close destination details">×</button>
+        <div class="destination-modal-image" id="destination-modal-image"></div>
+        <div class="destination-modal-content">
+          <h3 id="destination-modal-title">Destination</h3>
+          <p class="destination-modal-copy" id="destination-modal-description">Destination overview.</p>
+
+          <div class="destination-modal-meta">
+            <p><strong>Opening Hours:</strong> <span id="destination-modal-hours">Hours info</span></p>
+            <p><strong>Best Visit Window:</strong> <span id="destination-modal-best-time">Best season info</span></p>
+          </div>
+
+          <h4>Visitor Rules</h4>
+          <ul class="destination-modal-list" id="destination-modal-rules"></ul>
+
+          <h4>Helpful Notes</h4>
+          <ul class="destination-modal-list" id="destination-modal-notes"></ul>
+          <p class="destination-modal-tip" id="destination-modal-tip"></p>
+          <a class="destination-modal-map" id="destination-modal-map" href="https://www.google.com/maps" target="_blank" rel="noopener">Open In Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <p class="footer-wordmark">SHANTHA TOURS</p>
+
+    <div class="footer-grid">
+      <section>
+        <h3>Explore Sri Lanka.</h3>
+        <p>We are your trusted gateway to unforgettable island adventures from highlands to golden beaches.</p>
+        <div class="footer-socials" aria-label="Social links">
+          <a href="#" class="social-link social-facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" class="social-link social-instagram" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" class="social-link social-tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+        </div>
+      </section>
+
+      <section>
+        <h4>Company</h4>
+        <a href="index.html#home">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="index.html#gallery">Gallery</a>
+        <a href="contact.html">Contact</a>
+      </section>
+
+      <section>
+        <h4>Support</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Booking Guide</a>
+      </section>
+
+      <section>
+        <h4>Get In Touch</h4>
+        <p>No. 21, Castel Lane, Kandy, Sri Lanka.</p>
+        <p>+94 77 780 7055</p>
+        <p>shanthatraders.businessmail@gmail.com</p>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Shantha Tours. All rights reserved.</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
