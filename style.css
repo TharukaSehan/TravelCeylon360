@@ -23,6 +23,13 @@ body {
   color: var(--ink);
   background: var(--bg);
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
 }
 
 body.is-loading {
@@ -2178,9 +2185,35 @@ main > section:not(.hero-showcase) {
     padding: 0 4vw;
   }
 
+  .header-tools {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-block;
+    justify-self: end;
+    z-index: 22;
+  }
+
   .main-nav {
-    gap: 1rem;
-    padding: 0.55rem 1rem;
+    position: absolute;
+    right: 4vw;
+    top: calc(100% + 0.5rem);
+    width: min(20rem, 90vw);
+    background: rgba(8, 13, 19, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 0.8rem;
+    box-shadow: var(--shadow);
+    padding: 0.8rem;
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .main-nav.open {
+    display: flex;
+    animation: navMenuLift 0.32s ease-out both;
   }
 
   .hero-showcase {
@@ -2408,13 +2441,6 @@ main > section:not(.hero-showcase) {
     height: 15.2rem;
   }
 
-@media (prefers-reduced-motion: reduce) {
-  .svc-card {
-    animation: none !important;
-    transform: none !important;
-  }
-}
-
   .activity-card {
     min-width: 12.8rem;
     min-height: 18.8rem;
@@ -2474,6 +2500,13 @@ main > section:not(.hero-showcase) {
   .footer-bottom {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-card {
+    animation: none !important;
+    transform: none !important;
   }
 }
 
