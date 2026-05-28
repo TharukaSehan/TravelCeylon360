@@ -429,6 +429,7 @@ const serviceModalTitle = document.getElementById('service-modal-title');
 const serviceModalDesc = document.getElementById('service-modal-desc');
 const serviceModalImage = document.getElementById('service-modal-image');
 const serviceModalFeatures = document.getElementById('service-modal-features');
+const serviceModalWhatsApp = document.getElementById('service-modal-whatsapp');
 
 if (serviceModal && serviceStrip) {
   const openServiceModal = (serviceCard) => {
@@ -471,6 +472,23 @@ if (serviceModal && serviceStrip) {
     }
     if (serviceModalFeatures) {
       serviceModalFeatures.innerHTML = features.map((feature) => `<li>${feature}</li>`).join('');
+    }
+
+    // Populate WhatsApp contact button if provided on the card
+    try {
+      const contact = serviceCard.dataset.serviceContact;
+      const contactText = serviceCard.dataset.serviceContactText || '';
+      if (serviceModalWhatsApp) {
+        if (contact) {
+          serviceModalWhatsApp.href = contact;
+          serviceModalWhatsApp.textContent = contactText ? `WhatsApp ${contactText}` : 'Contact on WhatsApp';
+          serviceModalWhatsApp.style.display = 'inline-flex';
+        } else {
+          serviceModalWhatsApp.style.display = 'none';
+        }
+      }
+    } catch (e) {
+      // ignore
     }
 
     serviceModal.classList.add('is-open');
