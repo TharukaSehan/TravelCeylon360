@@ -127,6 +127,19 @@ window.addEventListener('resize', () => {
 });
 
 if (form && statusNode) {
+  // Lazy-load EmailJS SDK when needed
+  function loadEmailJs() {
+    return new Promise((resolve, reject) => {
+      if (window.emailjs && typeof window.emailjs.send === 'function') return resolve();
+      const s = document.createElement('script');
+      s.src = 'https://cdn.emailjs.com/sdk/3.6.2/email.min.js';
+      s.async = true;
+      s.onload = () => resolve();
+      s.onerror = (e) => reject(new Error('Failed to load EmailJS SDK'));
+      document.head.appendChild(s);
+    });
+  }
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!form.checkValidity()) {
@@ -136,11 +149,12 @@ if (form && statusNode) {
     }
 
     const submitButton = form.querySelector('button[type="submit"]');
-    const originalText = submitButton.textContent;
+    const originalText = submitButton ? submitButton.textContent : 'Submit';
     const recipientEmail = form.dataset.recipientEmail || 'rmprathnabandara@gmail.com';
-    submitButton.textContent = 'Opening email...';
-    submitButton.disabled = true;
     statusNode.textContent = '';
+    if (submitButton) {
+      submitButton.disabled = true;
+    }
 
     try {
       const formData = new FormData(form);
@@ -150,35 +164,77 @@ if (form && statusNode) {
       const month = String(formData.get('month') || '').trim();
       const message = String(formData.get('message') || '').trim();
 
-      const subject = `Travel inquiry${name ? ` from ${name}` : ''}`;
-      const bodyLines = [
-        'New travel inquiry from the website:',
-        '',
-        `Full Name: ${name}`,
-        `Email Address: ${email}`,
-        `Phone Number: ${phone}`,
-        `Travel Month: ${month}`,
-        '',
-        'Message:',
-        message,
-        '',
-        `Page: ${window.location.href}`,
-      ];
+      // If EmailJS config data attributes exist on the form, send via EmailJS (client-side)
+      const emailJsServiceId = form.dataset.emailjsServiceId;
+      const emailJsTemplateId = form.dataset.emailjsTemplateId;
+      const emailJsPublicKey = form.dataset.emailjsPublicKey;
 
-      const mailtoUrl = `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
-      window.location.href = mailtoUrl;
+      if (emailJsServiceId && emailJsTemplateId && emailJsPublicKey) {
+        if (submitButton) submitButton.textContent = 'Sending...';
+        await loadEmailJs();
 
-      const successMessage = form.dataset.successMessage
-        || `Your email app should open with the inquiry addressed to ${recipientEmail}. Please send it from there.`;
-      statusNode.textContent = successMessage;
-      statusNode.style.color = '#0f766e';
+        if (!window.emailjs || typeof window.emailjs.send !== 'function') {
+          throw new Error('EmailJS SDK did not initialize correctly');
+        }
+
+        // init with public key
+        try {
+          window.emailjs.init(emailJsPublicKey);
+        } catch (e) {
+          // some SDK versions require init to be called once; ignore if already initialized
+        }
+
+        const templateParams = {
+          name,
+          email,
+          phone,
+          month,
+          message,
+          page: window.location.href,
+        };
+
+        await window.emailjs.send(emailJsServiceId, emailJsTemplateId, templateParams);
+
+        const successMessage = form.dataset.successMessage
+          || 'Your inquiry was sent successfully. We will respond soon.';
+        statusNode.textContent = successMessage;
+        statusNode.style.color = '#0f766e';
+      } else {
+        // Fallback: open user's email app using mailto
+        if (submitButton) submitButton.textContent = 'Opening email...';
+
+        const subject = `Travel inquiry${name ? ` from ${name}` : ''}`;
+        const bodyLines = [
+          'New travel inquiry from the website:',
+          '',
+          `Full Name: ${name}`,
+          `Email Address: ${email}`,
+          `Phone Number: ${phone}`,
+          `Travel Month: ${month}`,
+          '',
+          'Message:',
+          message,
+          '',
+          `Page: ${window.location.href}`,
+        ];
+
+        const mailtoUrl = `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+        window.location.href = mailtoUrl;
+
+        const successMessage = form.dataset.successMessage
+          || `Your email app should open with the inquiry addressed to ${recipientEmail}. Please send it from there.`;
+        statusNode.textContent = successMessage;
+        statusNode.style.color = '#0f766e';
+      }
     } catch (error) {
-      statusNode.textContent = 'There was an error opening your email app. Please use the email link on the page to contact us directly.';
+      statusNode.textContent = 'There was an error sending your inquiry. Please try again or contact us directly.';
       statusNode.style.color = '#e27d4a';
       console.error('Form submission error:', error);
     } finally {
-      submitButton.textContent = originalText;
-      submitButton.disabled = false;
+      if (submitButton) {
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+      }
     }
   });
 }
