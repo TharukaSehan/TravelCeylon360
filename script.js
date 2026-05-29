@@ -137,41 +137,48 @@ if (form && statusNode) {
 
     const submitButton = form.querySelector('button[type="submit"]');
     const originalText = submitButton.textContent;
-    submitButton.textContent = 'Sending...';
+    const recipientEmail = form.dataset.recipientEmail || 'rmprathnabandara@gmail.com';
+    submitButton.textContent = 'Opening email...';
     submitButton.disabled = true;
     statusNode.textContent = '';
 
     try {
-      // Replace with your Formspree endpoint: https://formspree.io/f/{YOUR_FORM_ID}
-      // Sign up at formspree.io and create a form to get your endpoint
-      const formspreeEndpoint = 'https://formspree.io/f/YOUR_FORM_ID';
-      
       const formData = new FormData(form);
-      const response = await fetch(formspreeEndpoint, {
-        method: 'POST',
-        body: formData,
-        headers: {
-          'Accept': 'application/json'
-        }
-      });
+      const name = String(formData.get('name') || '').trim();
+      const email = String(formData.get('email') || '').trim();
+      const phone = String(formData.get('phone') || '').trim();
+      const month = String(formData.get('month') || '').trim();
+      const message = String(formData.get('message') || '').trim();
 
-      if (response.ok) {
-        const successMessage = form.dataset.successMessage
-          || 'Thanks! Your message has been received. We will contact you shortly.';
-        statusNode.textContent = successMessage;
-        statusNode.style.color = '#0f766e';
-        form.reset();
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
-      } else {
-        throw new Error('Form submission failed');
-      }
+      const subject = `Travel inquiry${name ? ` from ${name}` : ''}`;
+      const bodyLines = [
+        'New travel inquiry from the website:',
+        '',
+        `Full Name: ${name}`,
+        `Email Address: ${email}`,
+        `Phone Number: ${phone}`,
+        `Travel Month: ${month}`,
+        '',
+        'Message:',
+        message,
+        '',
+        `Page: ${window.location.href}`,
+      ];
+
+      const mailtoUrl = `mailto:${encodeURIComponent(recipientEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+      window.location.href = mailtoUrl;
+
+      const successMessage = form.dataset.successMessage
+        || `Your email app should open with the inquiry addressed to ${recipientEmail}. Please send it from there.`;
+      statusNode.textContent = successMessage;
+      statusNode.style.color = '#0f766e';
     } catch (error) {
-      statusNode.textContent = 'There was an error sending your message. Please try again or call us directly.';
+      statusNode.textContent = 'There was an error opening your email app. Please use the email link on the page to contact us directly.';
       statusNode.style.color = '#e27d4a';
+      console.error('Form submission error:', error);
+    } finally {
       submitButton.textContent = originalText;
       submitButton.disabled = false;
-      console.error('Form submission error:', error);
     }
   });
 }
