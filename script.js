@@ -132,7 +132,7 @@ if (form && statusNode) {
     return new Promise((resolve, reject) => {
       if (window.emailjs && typeof window.emailjs.send === 'function') return resolve();
       const s = document.createElement('script');
-      s.src = 'https://cdn.emailjs.com/sdk/3.6.2/email.min.js';
+      s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
       s.async = true;
       s.onload = () => resolve();
       s.onerror = (e) => reject(new Error('Failed to load EmailJS SDK'));
@@ -204,6 +204,8 @@ if (form && statusNode) {
           // some SDK versions require init to be called once; ignore if already initialized
         }
 
+        const details = summaryLines.join('\n');
+
         const templateParams = {
           name,
           email,
@@ -212,7 +214,8 @@ if (form && statusNode) {
           message,
           to_email: recipientEmail,
           reply_to: email,
-          summary: summaryLines.join('\n'),
+          summary: details,
+          details,
           page: window.location.href,
         };
 
