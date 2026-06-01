@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enquiry Now | Upcountry Travels</title>
+  <meta name="description" content="Send your Sri Lanka travel enquiry to Upcountry Travels. Pick dates from the calendar, skip hotel or meal planning if needed, and get a custom itinerary." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Sora:wght@300;400;500;600;700;800&family=Prata&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .enquiry-hero {
+      min-height: 58vh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      padding: 8.25rem 5vw 2.1rem;
+      color: #fff;
+      background:
+        linear-gradient(180deg, rgba(4, 9, 18, 0.2) 0%, rgba(4, 9, 18, 0.86) 100%),
+        url('assets/MH4.jpg');
+      background-size: cover;
+      background-position: center;
+      overflow: hidden;
+    }
+
+    .enquiry-hero::before,
+    .enquiry-hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .enquiry-hero::before {
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 141, 30, 0.42), transparent 30%),
+        radial-gradient(circle at 82% 22%, rgba(52, 205, 255, 0.32), transparent 34%),
+        linear-gradient(140deg, rgba(8, 18, 28, 0.08), rgba(8, 18, 28, 0.52));
+      mix-blend-mode: screen;
+    }
+
+    .enquiry-hero::after {
+      background:
+        linear-gradient(110deg, rgba(0, 0, 0, 0.34), transparent 48%),
+        linear-gradient(0deg, rgba(0, 0, 0, 0.18), transparent 70%);
+    }
+
+    .enquiry-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 52rem;
+      display: grid;
+      gap: 0.95rem;
+    }
+
+    .enquiry-kicker {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      font-size: 0.72rem;
+      color: #8ce7ff;
+      font-weight: 800;
+    }
+
+    .enquiry-kicker::before {
+      content: "";
+      width: 3rem;
+      height: 2px;
+      background: linear-gradient(90deg, #ff8d1e, #35cfff);
+      border-radius: 999px;
+    }
+
+    .enquiry-hero h1 {
+      margin: 0;
+      font-family: "Anton", sans-serif;
+      text-transform: uppercase;
+      font-size: clamp(3rem, 8vw, 6.8rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      text-shadow: 0 16px 38px rgba(0, 0, 0, 0.38);
+    }
+
+    .enquiry-hero p {
+      max-width: 60ch;
+      color: rgba(236, 242, 248, 0.92);
+      font-size: 1.02rem;
+    }
+
+    .enquiry-highlights {
+      margin-top: -1.45rem;
+      padding: 0 5vw;
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.95rem;
+    }
+
+    .enquiry-highlight {
+      border-radius: 1rem;
+      padding: 1rem 1.1rem;
+      color: #f5fbff;
+      background: linear-gradient(135deg, rgba(15, 20, 28, 0.92), rgba(13, 71, 88, 0.9));
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 18px 30px rgba(8, 20, 31, 0.14);
+      backdrop-filter: blur(8px);
+    }
+
+    .enquiry-highlight h2 {
+      margin-bottom: 0.35rem;
+      font-family: "Sora", sans-serif;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #6ee1ff;
+    }
+
+    .enquiry-highlight p,
+    .enquiry-highlight a {
+      color: rgba(238, 244, 249, 0.96);
+      font-size: 0.94rem;
+    }
+
+    .enquiry-wrap {
+      padding: 3rem 5vw 4.5rem;
+      display: grid;
+      grid-template-columns: 1.25fr 0.78fr;
+      gap: 1.2rem;
+      align-items: start;
+    }
+
+    .enquiry-panel,
+    .enquiry-side {
+      border-radius: 1.25rem;
+      border: 1px solid rgba(216, 205, 192, 0.9);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(247, 250, 248, 0.96));
+      box-shadow: 0 18px 42px rgba(24, 38, 34, 0.12);
+    }
+
+    .enquiry-panel {
+      overflow: hidden;
+    }
+
+    .enquiry-panel-head {
+      padding: 1.25rem 1.25rem 1rem;
+      background:
+        linear-gradient(135deg, rgba(255, 141, 30, 0.12), rgba(53, 207, 255, 0.14)),
+        linear-gradient(180deg, #fff, #f8fbfa);
+      border-bottom: 1px solid rgba(216, 205, 192, 0.7);
+    }
+
+    .enquiry-title {
+      display: grid;
+      gap: 0.35rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .enquiry-title p {
+      color: var(--muted);
+      max-width: 60ch;
+    }
+
+    .enquiry-form {
+      padding: 1.25rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .section-card {
+      border: 1px solid rgba(216, 205, 192, 0.78);
+      border-radius: 1rem;
+      padding: 1rem;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 251, 250, 0.98));
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+
+    .section-card h3 {
+      margin-bottom: 0.8rem;
+      font-family: "Sora", sans-serif;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: #0f766e;
+    }
+
+    .field-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .field-grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .field {
+      display: grid;
+      gap: 0.4rem;
+    }
+
+    .field > span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid rgba(199, 185, 171, 0.9);
+      border-radius: 0.8rem;
+      padding: 0.95rem 1rem;
+      font: inherit;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fff, #f4faf8);
+      box-shadow: 0 6px 16px rgba(15, 33, 28, 0.05);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .field textarea {
+      min-height: 8.5rem;
+      resize: vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      outline: none;
+      border-color: #2ecbf5;
+      box-shadow: 0 0 0 4px rgba(46, 203, 245, 0.18), 0 12px 24px rgba(15, 33, 28, 0.08);
+      transform: translateY(-1px);
+      background: #fff;
+    }
+
+    .helper-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+      margin-top: 0.65rem;
+    }
+
+    .helper-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(15, 118, 110, 0.09);
+      color: #0f766e;
+      font-size: 0.77rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .choice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+      gap: 0.6rem;
+    }
+
+    .choice-card {
+      position: relative;
+      display: block;
+      border-radius: 0.9rem;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .choice-card input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .choice-card span {
+      display: flex;
+      min-height: 3.1rem;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0.75rem 0.85rem;
+      border-radius: 0.9rem;
+      border: 1px solid rgba(215, 203, 191, 0.95);
+      background: linear-gradient(180deg, #ffffff, #f4faf9);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+      box-shadow: 0 8px 20px rgba(19, 31, 28, 0.06);
+    }
+
+    .choice-card:hover span,
+    .choice-card input:focus-visible + span {
+      transform: translateY(-2px);
+      border-color: rgba(46, 203, 245, 0.8);
+      box-shadow: 0 12px 22px rgba(25, 124, 154, 0.14);
+    }
+
+    .choice-card input:checked + span {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, #ff8d1e, #2ecbf5);
+      box-shadow: 0 14px 24px rgba(255, 141, 30, 0.2);
+    }
+
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .chip {
+      position: relative;
+      display: inline-flex;
+      cursor: pointer;
+    }
+
+    .chip input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .chip span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.72rem 0.95rem;
+      border-radius: 999px;
+      border: 1px solid rgba(216, 205, 192, 0.95);
+      background: #fff;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      box-shadow: 0 8px 18px rgba(19, 31, 28, 0.05);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .chip:hover span,
+    .chip input:focus-visible + span {
+      transform: translateY(-2px);
+      border-color: rgba(15, 118, 110, 0.45);
+    }
+
+    .chip input:checked + span {
+      color: #fff;
+      background: linear-gradient(135deg, #0f766e, #2ecbf5);
+      border-color: transparent;
+    }
+
+    .form-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-top: 0.2rem;
+    }
+
+    .form-actions .btn {
+      min-width: 13rem;
+      border: 0;
+      background: linear-gradient(135deg, #ff8d1e, #0f766e);
+      box-shadow: 0 16px 26px rgba(15, 118, 110, 0.22);
+    }
+
+    .skip-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .enquiry-side {
+      padding: 1rem;
+      display: grid;
+      gap: 0.95rem;
+      align-content: start;
+    }
+
+    .side-card {
+      border-radius: 0.95rem;
+      padding: 1rem;
+      border: 1px solid rgba(216, 205, 192, 0.85);
+      background: linear-gradient(180deg, #fff, #f7fbfa);
+    }
+
+    .side-card h3 {
+      margin-bottom: 0.4rem;
+      font-family: "Sora", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #0f766e;
+      font-size: 0.84rem;
+    }
+
+    .side-card p,
+    .side-card li {
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .side-card ul {
+      margin: 0.4rem 0 0;
+      padding-left: 1rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .sticky-summary {
+      border-radius: 1rem;
+      padding: 1rem;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.98), rgba(46, 203, 245, 0.9));
+      box-shadow: 0 20px 34px rgba(15, 118, 110, 0.16);
+    }
+
+    .sticky-summary h3 {
+      margin-bottom: 0.35rem;
+      color: #fff;
+      font-family: "Sora", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.82rem;
+    }
+
+    .sticky-summary p {
+      color: rgba(245, 252, 255, 0.95);
+    }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.85rem;
+    }
+
+    .glass-line {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(15, 118, 110, 0.38), transparent);
+      margin: 0.25rem 0;
+    }
+
+    @media (max-width: 1024px) {
+      .enquiry-highlights,
+      .enquiry-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .enquiry-hero {
+        min-height: 50vh;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .enquiry-hero {
+        padding-top: 7.4rem;
+        min-height: 48vh;
+      }
+
+      .enquiry-highlights,
+      .enquiry-wrap {
+        padding-left: 4vw;
+        padding-right: 4vw;
+      }
+
+      .field-grid,
+      .field-grid.three,
+      .split-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .enquiry-panel,
+      .enquiry-side,
+      .sticky-summary {
+        border-radius: 0.95rem;
+      }
+
+      .form-actions .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="is-loading">
+  <div class="loading-screen" id="loading-screen" role="status" aria-live="polite" aria-label="Loading Upcountry Travels">
+    <div class="loader-brand" aria-hidden="true">
+      <p class="loader-main">Upcountry Travels</p>
+      <span class="loader-line"></span>
+      <p class="loader-meta">LOADING EXPERIENCE</p>
+    </div>
+  </div>
+
+  <div class="page-bg" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <a class="brand" href="index.html">
+      <span class="brand-text">
+        <span class="brand-hot">Upcountry Travels</span>
+      </span>
+    </a>
+
+    <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="main-nav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <a href="index.html#home">Home</a>
+      <a href="destinations.html">Destinations</a>
+      <a href="packages.html">Packages</a>
+      <a href="enquiry-now.html">Enquiry Now</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-tools">
+      <button class="lang-pill" type="button">EN</button>
+      <a href="https://wa.me/94766694794" target="_blank" rel="noopener" class="call-pill">CALL US</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="enquiry-hero section-reveal" aria-label="Enquiry hero">
+      <div class="enquiry-hero-inner">
+        <p class="enquiry-kicker">Plan your Sri Lankan adventure</p>
+        <h1>Enquiry Now</h1>
+        <p>Share your travel dates, group size, and preferences. If you are still deciding on hotel or meal plan, you can skip those for now and we will help you refine them later.</p>
+      </div>
+    </section>
+
+    <section class="enquiry-highlights section-reveal" aria-label="Quick enquiry details">
+      <article class="enquiry-highlight">
+        <h2>Fast Response</h2>
+        <p>We usually reply within a few business hours during Sri Lanka time.</p>
+      </article>
+      <article class="enquiry-highlight">
+        <h2>Flexible Planning</h2>
+        <p>Choose only the details you know now. Skip hotel or meal plan if you want.</p>
+      </article>
+      <article class="enquiry-highlight">
+        <h2>Calendar Ready</h2>
+        <p>Select arrival and departure dates directly from the calendar picker.</p>
+      </article>
+    </section>
+
+    <section class="enquiry-wrap section-reveal" aria-label="Enquiry form and support details">
+      <article class="enquiry-panel">
+        <div class="enquiry-panel-head">
+          <div class="enquiry-title">
+            <p class="eyebrow">Custom Travel Request</p>
+            <h2>Tell Us What You Need</h2>
+            <p>Use this form to build a custom Sri Lanka trip. The more you share, the better we can tailor the route, stay options, and activities.</p>
+          </div>
+          <div class="helper-row" aria-label="Highlights">
+            <span class="helper-tag"><i class="fa-solid fa-calendar-days" aria-hidden="true"></i> Calendar dates</span>
+            <span class="helper-tag"><i class="fa-solid fa-circle-minus" aria-hidden="true"></i> Skip hotel if unsure</span>
+            <span class="helper-tag"><i class="fa-solid fa-bowl-food" aria-hidden="true"></i> Skip meal plan if needed</span>
+          </div>
+        </div>
+
+        <form class="enquiry-form" data-recipient-email="tharukapathirana0@gmail.com" data-emailjs-service-id="service_pfembkc" data-emailjs-template-id="template_oebs2v7" data-emailjs-public-key="uQNB8iv1hyJvqAPE8" data-success-message="Your inquiry was sent successfully.">
+          <div class="section-card">
+            <h3>Your Details</h3>
+            <div class="field-grid">
+              <label class="field">
+                <span>Name</span>
+                <input type="text" name="name" required placeholder="Your full name" />
+              </label>
+              <label class="field">
+                <span>Country</span>
+                <input type="text" name="country" required placeholder="Your country" />
+              </label>
+              <label class="field">
+                <span>Email</span>
+                <input type="email" name="email" required placeholder="you@example.com" />
+              </label>
+              <label class="field">
+                <span>WhatsApp Number</span>
+                <input type="tel" name="whatsapp" required placeholder="+94 7X XXX XXXX" />
+              </label>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Travel Dates</h3>
+            <div class="split-grid">
+              <label class="field">
+                <span>Arrival Date</span>
+                <input type="date" name="arrivalDate" required />
+              </label>
+              <label class="field">
+                <span>Departure Date</span>
+                <input type="date" name="departureDate" required />
+              </label>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Trip Size</h3>
+            <div class="field-grid three">
+              <label class="field">
+                <span>No. of Pax</span>
+                <select name="pax" required>
+                  <option value="" selected disabled>Select pax</option>
+                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                  <option>6</option><option>7</option><option>8</option><option>9</option><option>10+</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>No. of Rooms</span>
+                <select name="rooms" required>
+                  <option value="" selected disabled>Select rooms</option>
+                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5+</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>Target Budget</span>
+                <select name="budget" required>
+                  <option value="" selected disabled>Select budget</option>
+                  <option>Budget friendly</option>
+                  <option>Mid range</option>
+                  <option>Comfort plus</option>
+                  <option>Luxury</option>
+                  <option>Premium tailor-made</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Hotel Choice</h3>
+            <div class="choice-grid">
+              <label class="choice-card"><input type="radio" name="hotelCategory" value="Boutique" /><span>Boutique</span></label>
+              <label class="choice-card"><input type="radio" name="hotelCategory" value="5 Star" /><span>5 Star</span></label>
+              <label class="choice-card"><input type="radio" name="hotelCategory" value="4 Star" /><span>4 Star</span></label>
+              <label class="choice-card"><input type="radio" name="hotelCategory" value="3 Star" /><span>3 Star</span></label>
+              <label class="choice-card"><input type="radio" name="hotelCategory" value="2 Star" /><span>2 Star</span></label>
+              <label class="choice-card"><input type="radio" name="hotelCategory" value="Budget" /><span>Budget</span></label>
+              <label class="choice-card"><input type="radio" name="hotelCategory" value="Skip for now" checked /><span>Skip for now</span></label>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Meal Plan</h3>
+            <div class="choice-grid">
+              <label class="choice-card"><input type="radio" name="mealPlan" value="Bed & Breakfast" /><span>Bed & Breakfast</span></label>
+              <label class="choice-card"><input type="radio" name="mealPlan" value="Half Board" /><span>Half Board</span></label>
+              <label class="choice-card"><input type="radio" name="mealPlan" value="Full Board" /><span>Full Board</span></label>
+              <label class="choice-card"><input type="radio" name="mealPlan" value="Skip for now" checked /><span>Skip for now</span></label>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Interests</h3>
+            <div class="chip-grid">
+              <label class="chip"><input type="checkbox" name="interests" value="Culture & Heritage" /><span>Culture & Heritage</span></label>
+              <label class="chip"><input type="checkbox" name="interests" value="Ancient Archaeology" /><span>Ancient Archaeology</span></label>
+              <label class="chip"><input type="checkbox" name="interests" value="Wildlife" /><span>Wildlife</span></label>
+              <label class="chip"><input type="checkbox" name="interests" value="Adventure" /><span>Adventure</span></label>
+              <label class="chip"><input type="checkbox" name="interests" value="Beach" /><span>Beach</span></label>
+              <label class="chip"><input type="checkbox" name="interests" value="Shopping" /><span>Shopping</span></label>
+              <label class="chip"><input type="checkbox" name="interests" value="My Preferred attractions" /><span>My Preferred attractions</span></label>
+            </div>
+          </div>
+
+          <div class="section-card">
+            <h3>Extra Notes</h3>
+            <label class="field">
+              <span>Other Requirement</span>
+              <textarea name="otherRequirement" rows="6" placeholder="Tell us about airport pickup, special occasions, children, transport style, or anything else we should know."></textarea>
+            </label>
+            <div class="glass-line"></div>
+            <p class="skip-note">Tip: If you skip hotel or meal plan now, we will suggest options after we review your dates and budget.</p>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn" type="submit">Send Enquiry</button>
+            <p class="form-note" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </article>
+
+      <aside class="enquiry-side" aria-label="Support details">
+        <article class="sticky-summary">
+          <h3>What Happens Next</h3>
+          <p>We review your enquiry, suggest the best travel plan, and get back to you with stay and itinerary options.</p>
+        </article>
+
+        <article class="side-card">
+          <h3>Quick Help</h3>
+          <p>Use the skip options whenever you are not ready to decide on hotels or meal plans.</p>
+        </article>
+
+        <article class="side-card">
+          <h3>Suggested Details</h3>
+          <ul>
+            <li>Preferred dates from the calendar</li>
+            <li>Arrival and departure airports</li>
+            <li>Trip style, pace, and interests</li>
+          </ul>
+        </article>
+
+        <article class="side-card">
+          <h3>Need Support?</h3>
+          <p><a href="tel:+94766694794">+94 76 669 4794</a></p>
+          <p><a href="mailto:rmprathnabandara@gmail.com">rmprathnabandara@gmail.com</a></p>
+        </article>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <p class="footer-wordmark">Upcountry Travels</p>
+
+    <div class="footer-grid">
+      <section>
+        <h3>Explore Sri Lanka.</h3>
+        <p>We are your trusted gateway to unforgettable island adventures from highlands to golden beaches.</p>
+        <div class="footer-socials" aria-label="Social links">
+          <a href="#" class="social-link social-facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f" aria-hidden="true"></i></a>
+          <a href="#" class="social-link social-instagram" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+          <a href="#" class="social-link social-tiktok" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+        </div>
+      </section>
+
+      <section>
+        <h4>Company</h4>
+        <a href="index.html#home">Home</a>
+        <a href="destinations.html">Destinations</a>
+        <a href="packages.html">Packages</a>
+        <a href="enquiry-now.html">Enquiry Now</a>
+        <a href="contact.html">Contact</a>
+      </section>
+
+      <section>
+        <h4>Support</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="#">Booking Guide</a>
+      </section>
+
+      <section>
+        <h4>Get In Touch</h4>
+        <p>No. 21, Castel Lane, Kandy, Sri Lanka.</p>
+        <p>+94 77 780 7055</p>
+        <p>rmprathnabandara@gmail.com</p>
+      </section>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Upcountry Travels. All rights reserved.</p>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const arrivalInput = document.querySelector('input[name="arrivalDate"]');
+    const departureInput = document.querySelector('input[name="departureDate"]');
+
+    if (arrivalInput && departureInput) {
+      const today = new Date();
+      const isoToday = today.toISOString().split('T')[0];
+      arrivalInput.min = isoToday;
+      departureInput.min = isoToday;
+
+      arrivalInput.addEventListener('change', () => {
+        const arrivalDate = arrivalInput.value;
+        departureInput.min = arrivalDate || isoToday;
+        if (departureInput.value && departureInput.value < departureInput.min) {
+          departureInput.value = '';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

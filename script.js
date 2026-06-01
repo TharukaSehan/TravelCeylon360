@@ -1,6 +1,6 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const nav = document.querySelector('.main-nav');
-const form = document.querySelector('.booking-form, .contact-form');
+const form = document.querySelector('.booking-form, .contact-form, .enquiry-form');
 const statusNode = document.querySelector('.form-note');
 const year = document.getElementById('year');
 const loader = document.getElementById('loading-screen');
@@ -158,11 +158,31 @@ if (form && statusNode) {
 
     try {
       const formData = new FormData(form);
-      const name = String(formData.get('name') || '').trim();
-      const email = String(formData.get('email') || '').trim();
-      const phone = String(formData.get('phone') || '').trim();
-      const month = String(formData.get('month') || '').trim();
-      const message = String(formData.get('message') || '').trim();
+      const groupedEntries = {};
+      for (const [key, value] of formData.entries()) {
+        if (!groupedEntries[key]) {
+          groupedEntries[key] = [];
+        }
+        groupedEntries[key].push(String(value).trim());
+      }
+
+      const getFirstValue = (fieldName) => String(formData.get(fieldName) || '').trim();
+      const getMultiValue = (fieldName) => (groupedEntries[fieldName] || []).filter(Boolean).join(', ');
+
+      const name = getFirstValue('name');
+      const email = getFirstValue('email');
+      const phone = getFirstValue('phone') || getFirstValue('whatsapp');
+      const month = getFirstValue('month') || getFirstValue('travelMonth');
+      const message = getFirstValue('message') || getFirstValue('notes') || getFirstValue('otherRequirement');
+
+      const summaryLines = [];
+      Object.entries(groupedEntries).forEach(([fieldName, values]) => {
+        if (!values.length) return;
+        const formattedName = fieldName
+          .replace(/([a-z])([A-Z])/g, '$1 $2')
+          .replace(/^./, (char) => char.toUpperCase());
+        summaryLines.push(`${formattedName}: ${values.join(', ')}`);
+      });
 
       // If EmailJS config data attributes exist on the form, send via EmailJS (client-side)
       const emailJsServiceId = form.dataset.emailjsServiceId;
@@ -190,6 +210,9 @@ if (form && statusNode) {
           phone,
           month,
           message,
+          to_email: recipientEmail,
+          reply_to: email,
+          summary: summaryLines.join('\n'),
           page: window.location.href,
         };
 
@@ -207,13 +230,8 @@ if (form && statusNode) {
         const bodyLines = [
           'New travel inquiry from the website:',
           '',
-          `Full Name: ${name}`,
-          `Email Address: ${email}`,
-          `Phone Number: ${phone}`,
-          `Travel Month: ${month}`,
-          '',
-          'Message:',
-          message,
+          ...summaryLines,
+          ...(message ? ['', 'Message:', message] : []),
           '',
           `Page: ${window.location.href}`,
         ];
@@ -424,7 +442,7 @@ if (tourModal && tourDetailButtons.length) {
     const badge = badgeNode ? badgeNode.textContent.trim() : 'Trending Tour';
     const image = tourCard.style.backgroundImage;
     const description = tourCard.dataset.tourDescription
-      || 'Explore this featured route with a curated experience by Travel Ceylon Tours.';
+      || 'Explore this featured route with a curated experience by Upcountry Travels.';
     const features = (tourCard.dataset.tourFeatures || 'Private Transfer|Expert Guide|Flexible Stops')
       .split('|')
       .map((item) => item.trim())
@@ -501,7 +519,7 @@ if (serviceModal && serviceStrip) {
     const image = serviceCard.style.backgroundImage;
     const badge = serviceCard.dataset.serviceBadge || 'Service';
     const description = serviceCard.dataset.serviceDescription
-      || 'Explore this service with Travel Ceylon Tours.';
+      || 'Explore this service with Upcountry Travels.';
     const features = (serviceCard.dataset.serviceFeatures || 'Local Support|Flexible Planning|Fast Response')
       .split('|')
       .map((item) => item.trim())
@@ -932,7 +950,7 @@ if (destinationModal && destinationButtons.length) {
         'Carry water, sunscreen, and comfortable footwear.',
         'Start early to avoid crowds and midday heat.'
       ],
-      tip: 'Tip: Contact Travel Ceylon Tours for a guided day plan.'
+      tip: 'Tip: Contact Upcountry Travels for a guided day plan.'
     };
 
     if (destinationModalTitle) {
