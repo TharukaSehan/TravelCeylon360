@@ -12,534 +12,249 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     .packages-hero {
-      min-height: 68vh;
-      position: relative;
-      display: grid;
-      align-items: center;
-      gap: 2rem;
-      padding: 8rem 5vw 3rem;
-      color: #fff;
-      background:
-        linear-gradient(180deg, rgba(4, 10, 16, 0.14) 0%, rgba(4, 10, 16, 0.78) 100%),
-        url("assets/MH4.jpg");
-      background-size: cover;
-      background-position: center;
-      overflow: hidden;
+      padding: 7.2rem 5vw 1.1rem;
+      text-align: center;
+      color: var(--ink);
     }
 
-    .packages-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 8% 8%, rgba(255, 152, 35, 0.38), transparent 45%),
-        radial-gradient(circle at 92% 12%, rgba(47, 206, 255, 0.32), transparent 48%);
-      pointer-events: none;
-    }
-
-    .packages-hero > * {
-      position: relative;
-      z-index: 1;
-    }
-
-    .packages-kicker {
-      color: #5ed3ff;
-      text-transform: uppercase;
-      letter-spacing: 0.26em;
-      font-size: 0.74rem;
-      font-weight: 700;
+    .packages-hero > div {
+      max-width: 54rem;
+      margin: 0 auto;
     }
 
     .packages-hero h1 {
-      font-family: "Anton", sans-serif;
-      text-transform: uppercase;
-      line-height: 0.94;
-      letter-spacing: 0.02em;
-      font-size: clamp(3.2rem, 9vw, 6.8rem);
-      max-width: 10ch;
-      text-shadow: 0 16px 40px rgba(0, 0, 0, 0.48);
-      margin-bottom: -0.5rem;
+      font-family: "Sora", sans-serif;
+      font-size: clamp(2rem, 4.5vw, 3.15rem);
+      font-weight: 700;
+      line-height: 1.08;
+      color: #1257a7;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.7rem;
+      animation: packageFadeUp 0.7s ease both;
     }
 
     .packages-hero p {
-      max-width: 56ch;
-      color: rgba(235, 242, 250, 0.94);
-      font-size: 1.1rem;
+      max-width: 48rem;
+      margin: 0 auto;
+      color: #687782;
+      font-size: 0.98rem;
+      line-height: 1.7;
+      animation: packageFadeUp 0.8s ease both;
     }
 
-    .packages-stats {
-      display: flex;
-      gap: 2rem;
-      margin-top: 1.2rem;
-      flex-wrap: wrap;
-    }
-
-    .packages-stat {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-    }
-
-    .packages-stat-num {
-      font-family: "Anton", sans-serif;
-      font-size: 1.9rem;
-      color: #ff8a1f;
-    }
-
-    .packages-stat-label {
-      font-size: 0.9rem;
-      color: rgba(240, 246, 252, 0.9);
-    }
-
-    .pricing-section {
-      padding: 3.5rem 5vw;
-      background: linear-gradient(180deg, rgba(6,10,16,0.88) 0%, rgba(6,10,16,0.95) 100%);
-      color: #e6eef2;
-      text-align: center;
-    }
-
-    .pricing-header {
-      max-width: 60ch;
-      margin: 0 auto 2.5rem;
-    }
-
-    .pricing-header .section-kicker {
-      color: #ff8a22;
-    }
-
-    .pricing-header h2 {
-      font-family: "Anton", sans-serif;
-      font-size: clamp(2.4rem, 6vw, 4.8rem);
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: var(--ink);
-      margin-top: 0.5rem;
-    }
-
-    .pricing-header p {
-      color: var(--muted);
-      margin-top: 0.8rem;
-    }
-
-    .pricing-grid {
+    .package-grid {
+      padding: 1.6rem 5vw 3.4rem;
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
-      gap: 1.4rem;
-      margin-bottom: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(16.75rem, 1fr));
+      gap: 2rem 1.35rem;
+      align-items: start;
     }
 
-    .price-card {
+    .package-card {
+      border: 0;
+      border-radius: 1.35rem;
       background: #fff;
-      border: 2px solid var(--line);
-      border-radius: 1.2rem;
-      padding: 1.5rem;
-      box-shadow: 0 16px 36px rgba(23, 35, 31, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      box-shadow: 0 16px 36px rgba(31, 44, 58, 0.1);
+      overflow: hidden;
       display: flex;
       flex-direction: column;
+      transition:
+        transform 0.28s ease,
+        box-shadow 0.28s ease,
+        border-color 0.28s ease;
       position: relative;
-      overflow: hidden;
+      animation: packageRise 0.72s ease both;
     }
 
-    .price-card::before {
+    .package-card:nth-child(1) { animation-delay: 0.05s; }
+    .package-card:nth-child(2) { animation-delay: 0.12s; }
+    .package-card:nth-child(3) { animation-delay: 0.19s; }
+    .package-card:nth-child(4) { animation-delay: 0.26s; }
+
+    .package-card::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
+      inset: 0 0 auto 0;
       height: 4px;
-      background: linear-gradient(90deg, #ff8a1f, #0f766e);
+      background: linear-gradient(90deg, #0f57a6, #5eb2ff);
+      opacity: 0;
+      transition: opacity 0.25s ease;
     }
 
-    .vehicle-image-wrap {
-      height: 8rem;
-      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(15, 118, 110, 0.04));
-      border-radius: 0.8rem;
-      display: grid;
-      place-items: center;
-      padding: 0.35rem;
-      margin-bottom: 1rem;
-      border: 1px solid rgba(15, 118, 110, 0.15);
-      overflow: hidden;
+    .package-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 22px 48px rgba(31, 44, 58, 0.18);
     }
 
-    .vehicle-image-wrap img {
+    .package-card:hover::before {
+      opacity: 1;
+    }
+
+    .package-image-wrap {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center center;
-      display: block;
-      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-    }
-
-    .vehicle-badge {
-      display: inline-block;
-      background: linear-gradient(140deg, #0f766e, #0a4d47);
-      color: #fff;
-      padding: 0.35rem 0.85rem;
-      border-radius: 999px;
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 0.8rem;
-    }
-
-    .price-breakdown {
-      background: rgba(15, 118, 110, 0.06);
-      border: 1px solid rgba(15, 118, 110, 0.12);
-      border-radius: 0.7rem;
-      padding: 0.7rem;
-      margin-bottom: 0.9rem;
-      font-size: 0.85rem;
-    }
-
-    .price-breakdown-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.35rem 0;
-      color: var(--muted);
-    }
-
-    .price-breakdown-row:not(:last-child) {
-      border-bottom: 1px solid rgba(15, 118, 110, 0.1);
-    }
-
-    .price-breakdown-label {
-      font-size: 0.8rem;
-    }
-
-    .price-breakdown-value {
-      font-weight: 600;
-      color: #0f766e;
-    }
-
-    .price-breakdown-total {
-      color: #ff8a1f;
-      font-weight: 700;
-    }
-
-    .price-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 48px rgba(23, 35, 31, 0.18);
-      border-color: #0f766e;
-    }
-
-    .price-card.featured {
-      border-color: #0f766e;
-      box-shadow: 0 0 0 1px rgba(15, 118, 110, 0.2), 0 24px 48px rgba(23, 35, 31, 0.18);
-      transform: scale(1.03);
-    }
-
-    .price-card.featured::after {
-      content: "MOST POPULAR";
-      position: absolute;
-      top: -8px;
-      right: 1rem;
-      background: linear-gradient(140deg, #ff9723, #ff6f00);
-      color: #fff;
-      padding: 0.3rem 0.8rem;
-      border-radius: 0 0 0.6rem 0.6rem;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .price-duration {
-      font-family: "Anton", sans-serif;
-      font-size: 1.8rem;
-      color: #0f766e;
-      margin-bottom: 0.3rem;
-      letter-spacing: 0.02em;
-    }
-
-    .price-duration span {
-      font-size: 0.95rem;
-      color: var(--muted);
-      font-family: "Sora", sans-serif;
-    }
-
-    .price-label {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--muted);
-      margin-bottom: 0.8rem;
-    }
-
-    .price-amount {
-      font-family: "Anton", sans-serif;
-      font-size: 3rem;
-      color: #ff8a1f;
-      margin-bottom: 0.3rem;
-      line-height: 1;
-    }
-
-    .price-amount sup {
-      font-size: 1.2rem;
-      vertical-align: super;
-    }
-
-    .price-per {
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 1.2rem;
-    }
-
-    .price-features {
-      text-align: left;
-      margin: 1.2rem 0;
-      flex: 1;
-    }
-
-    .price-features ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .price-features li {
-      padding: 0.5rem 0;
-      color: var(--muted);
-      font-size: 0.9rem;
-      border-bottom: 1px solid var(--line);
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .price-features li::before {
-      content: "✓";
-      color: #0f766e;
-      font-weight: 700;
-      font-size: 1.1rem;
-    }
-
-    .price-features li:last-child {
-      border-bottom: none;
-    }
-
-    .price-card .btn {
-      margin-top: 1rem;
-      width: 100%;
-      justify-content: center;
-    }
-
-    .itineraries-section {
-      padding: 4rem 5vw 3rem;
-      background:
-        radial-gradient(circle at 10% 40%, rgba(14, 146, 186, 0.12), transparent 42%),
-        radial-gradient(circle at 95% 60%, rgba(14, 146, 186, 0.08), transparent 38%),
-        linear-gradient(180deg, rgba(6,10,16,0.9) 0%, rgba(6,10,16,0.98) 100%);
-      color: #dfeff6;
-    }
-
-    .itineraries-header {
-      text-align: center;
-      max-width: 65ch;
-      margin: 0 auto 2.5rem;
-    }
-
-    .itineraries-header .section-kicker {
-      color: #ff8a22;
-    }
-
-    .itineraries-header h2 {
-      font-family: "Anton", sans-serif;
-      font-size: clamp(2.4rem, 6vw, 4.8rem);
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      color: var(--ink);
-      margin-top: 0.5rem;
-    }
-
-    .itineraries-header p {
-      color: var(--muted);
-      margin-top: 0.8rem;
-    }
-
-    .itineraries-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr));
-      gap: 1.6rem;
-    }
-
-    .itinerary-card {
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 1.1rem;
+      aspect-ratio: 1.12 / 0.82;
       overflow: hidden;
-      box-shadow: var(--shadow);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      display: grid;
-      grid-template-rows: auto 1fr;
-      height: 100%;
-    }
-
-    .itinerary-card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 24px 48px rgba(23, 35, 31, 0.15);
-    }
-
-    .itinerary-map-wrap {
+      background: #dce6ea;
       position: relative;
-      height: 13.8rem;
-      background: linear-gradient(135deg, #d9effa, #b8e2f4);
-      display: grid;
-      place-items: center;
-      font-size: 3rem;
-      color: rgba(255, 255, 255, 0.4);
-      overflow: hidden;
     }
 
-    .itinerary-map-image {
-      width: 112%;
-      height: 112%;
-      object-fit: contain;
+    .package-image-wrap::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8, 14, 22, 0.02), rgba(8, 14, 22, 0.24));
+      pointer-events: none;
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+    }
+
+    .package-card:hover .package-image-wrap::after {
+      opacity: 0.18;
+    }
+
+    .package-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       object-position: center;
       display: block;
+      transform: scale(1);
+      transition: transform 0.45s ease;
     }
 
-    .itinerary-badge {
-      position: absolute;
-      top: 0.8rem;
-      right: 0.8rem;
-      background: linear-gradient(140deg, #ff9723, #ff6f00);
-      color: #fff;
-      padding: 0.4rem 0.9rem;
-      border-radius: 999px;
-      font-size: 0.73rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      box-shadow: 0 4px 12px rgba(255, 151, 35, 0.28);
-      z-index: 2;
+    .package-card:hover .package-image {
+      transform: scale(1.08);
     }
 
     .itinerary-content {
-      padding: 1.3rem;
+      padding: 1rem 1rem 1.15rem;
       display: flex;
       flex-direction: column;
     }
 
-    .itinerary-header-text {
+    .package-days {
       display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .itinerary-days {
-      font-family: "Anton", sans-serif;
-      font-size: 1.2rem;
-      color: #ff8a1f;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-    }
-
-    .itinerary-days-num {
-      font-size: 1.5rem;
-      color: #0f766e;
-    }
-
-    .itinerary-title {
-      font-family: "Prata", serif;
-      font-size: 1.5rem;
-      color: var(--ink);
-      margin-bottom: 0.5rem;
-      line-height: 1.2;
-    }
-
-    .itinerary-highlights {
-      display: flex;
-      gap: 0.6rem;
+      gap: 0.55rem;
+      align-items: center;
       flex-wrap: wrap;
-      margin-bottom: 0.8rem;
+      margin-top: 0.05rem;
+      color: #7a8690;
+      font-size: 0.79rem;
+      letter-spacing: 0.01em;
     }
 
-    .itinerary-tag {
-      background: rgba(15, 118, 110, 0.1);
-      color: #0f766e;
-      padding: 0.3rem 0.7rem;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .package-days i {
+      color: #6e7982;
+      font-size: 0.72rem;
     }
 
-    .itinerary-description {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      flex: 1;
-      margin-bottom: 1rem;
+    .package-days span {
+      color: #8b97a1;
     }
 
-    .itinerary-route {
-      background: linear-gradient(135deg, rgba(15, 118, 110, 0.08), rgba(15, 118, 110, 0.04));
-      border-left: 3px solid #0f766e;
-      padding: 0.8rem;
-      border-radius: 0.6rem;
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-bottom: 1rem;
-      line-height: 1.6;
+    .package-title {
+      font-family: "Sora", sans-serif;
+      font-size: 1.28rem;
+      line-height: 1.18;
+      color: #1257a7;
+      font-weight: 700;
+      margin: 0.3rem 0 0.35rem;
+    }
+
+    .package-description {
+      color: #6f7d87;
+      font-size: 0.92rem;
+      line-height: 1.62;
+      margin: 0.9rem 0 1.05rem;
+      max-width: 34ch;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .package-card:hover .package-description {
+      color: #5f6c77;
     }
 
     .itinerary-cta {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0.65rem 1.3rem;
+      gap: 0.45rem;
+      padding: 0.68rem 1.32rem;
       border-radius: 999px;
-      background: linear-gradient(140deg, #2fceff, #1377ff);
+      background: linear-gradient(135deg, #ffb300, #ff9a00);
       color: #fff;
-      font-weight: 600;
-      font-size: 0.82rem;
+      font-weight: 700;
+      font-size: 0.78rem;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.05em;
       border: 0;
       cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease,
+        letter-spacing 0.22s ease;
       text-decoration: none;
-      width: 100%;
+      width: fit-content;
       text-align: center;
+      box-shadow: 0 8px 16px rgba(255, 166, 0, 0.18);
+    }
+
+    .itinerary-cta span {
+      font-size: 1rem;
+      line-height: 1;
+      transform: translateX(0);
+      transition: transform 0.22s ease;
     }
 
     .itinerary-cta:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(31, 119, 255, 0.3);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 24px rgba(255, 166, 0, 0.28);
+      background: linear-gradient(135deg, #ffbf26, #ff9900);
+      letter-spacing: 0.08em;
     }
 
-    @media (max-width: 1024px) {
-      .itineraries-grid {
-        grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+    .itinerary-cta:hover span {
+      transform: translateX(3px);
+    }
+
+    @keyframes packageRise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes packageFadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
     @media (max-width: 760px) {
       .packages-hero {
-        min-height: 62vh;
-        padding-top: 7rem;
+        padding-top: 6.7rem;
       }
 
-      .packages-stats {
-        gap: 1.4rem;
-      }
-
-      .pricing-grid {
+      .package-grid {
         grid-template-columns: 1fr;
+        gap: 1.55rem;
+        padding-top: 1.2rem;
       }
 
-      .price-card.featured {
-        transform: scale(1);
-      }
-
-      .itineraries-grid {
-        grid-template-columns: 1fr;
+      .itinerary-content {
+        padding: 0.95rem 0.95rem 1.05rem;
       }
     }
 
@@ -783,7 +498,7 @@
 <body class="is-loading">
   <div class="loading-screen" id="loading-screen" role="status" aria-live="polite" aria-label="Loading Upcountry Travels">
     <div class="loader-brand" aria-hidden="true">
-      <p class="loader-main">Upcountry Travels</p>
+      <p class="loader-main"><span class="brand-hot">Upcountry</span> <span class="brand-cool">Travels</span></p>
       <span class="loader-line"></span>
       <p class="loader-meta">LOADING EXPERIENCE</p>
     </div>
@@ -794,7 +509,8 @@
   <header class="site-header" id="top">
     <a class="brand" href="index.html">
       <span class="brand-text">
-        <span class="brand-hot">Upcountry Travels</span>
+        <span class="brand-hot">Upcountry</span>
+        <span class="brand-cool">Travels</span>
       </span>
     </a>
 
@@ -821,303 +537,58 @@
   <main>
     <section class="packages-hero section-reveal" aria-label="Packages hero">
       <div>
-        <p class="packages-kicker">Curated Sri Lanka Journeys</p>
-        <h1>Tour Packages For Every Traveler</h1>
-        <p>From private beach escapes to immersive cultural expeditions, our 5–15 day packages combine luxury, adventure, and local expertise.</p>
-        <div class="packages-stats">
-          <div class="packages-stat">
-            <span class="packages-stat-num">6</span>
-            <span class="packages-stat-label">Signature Packages</span>
-          </div>
-          <div class="packages-stat">
-            <span class="packages-stat-num">100%</span>
-            <span class="packages-stat-label">Customizable</span>
-          </div>
-          <div class="packages-stat">
-            <span class="packages-stat-num">5–15</span>
-            <span class="packages-stat-label">Days Duration</span>
-          </div>
+        <h1>Our Sri Lankan Tour Packages</h1>
+        <p>Explore the wonders of Sri Lanka with Upcountry Travels, where every package is designed to help you experience the island's beauty, culture, and charm in the most memorable way possible.</p>
+      </div>
+    </section>
+    <section class="package-grid section-reveal" aria-label="Tour packages">
+      <article class="itinerary-card package-card">
+        <div class="package-image-wrap">
+          <img class="package-image" src="assets/sigiriya.jpg" alt="Culture and Heritage" loading="lazy" />
         </div>
-      </div>
-    </section>
+        <div class="itinerary-content">
+          <h3 class="itinerary-title package-title">Culture and Heritage</h3>
+          <div class="package-days"><i class="fa-solid fa-moon" aria-hidden="true"></i> 13 Nights <span>•</span> <i class="fa-solid fa-sun" aria-hidden="true"></i> 14 Days</div>
+          <p class="itinerary-description package-description">Explore Sri Lanka's rich culture, wildlife, and scenic beauty on this 14-day journey, blending adventure, relaxation, and unforgettable experiences.</p>
+          <button class="itinerary-cta" type="button">BOOK NOW <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
 
-    <section class="pricing-section section-reveal" aria-label="Package pricing">
-      <div class="pricing-header">
-        <p class="section-kicker">Transparent Pricing</p>
-        <h2>Choose Your Package</h2>
-        <p>All-inclusive pricing includes accommodation, meals, guides, activities, and vehicle costs. No hidden fees. <strong>Sedan cars:</strong> €70/day (≤5 days), €55/day (>5 days). <strong>KDH vans:</strong> €95/day (<5 days), €85/day (≥5 days).</p>
-      </div>
+      <article class="itinerary-card package-card">
+        <div class="package-image-wrap">
+          <img class="package-image" src="assets/nuwarae.jpg" alt="Sri Lanka Discovery" loading="lazy" />
+        </div>
+        <div class="itinerary-content">
+          <h3 class="itinerary-title package-title">Sri Lanka Discovery</h3>
+          <div class="package-days"><i class="fa-solid fa-moon" aria-hidden="true"></i> 8 Nights <span>•</span> <i class="fa-solid fa-sun" aria-hidden="true"></i> 9 Days</div>
+          <p class="itinerary-description package-description">A perfect mix of culture, nature, and adventure, this 9-day Sri Lankan tour promises unforgettable moments and unique experiences.</p>
+          <button class="itinerary-cta" type="button">BOOK NOW <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
 
-      <div class="pricing-grid">
-        <article class="price-card">
-          <span class="vehicle-badge">🚗 Sedan Car</span>
-          <div class="vehicle-image-wrap">
-            <img src="assets/sedan.jpg" alt="Sedan car" loading="lazy" />
-          </div>
-          <div class="price-duration">5 <span>DAYS</span></div>
-          <div class="price-label">From Per Day</div>
-          <div class="price-amount"><sup>€</sup>70</div>
-          <div class="price-breakdown">
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label">Base Package</span>
-              <span class="price-breakdown-value">€350</span>
-            </div>
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label">Vehicle (€70/day × 5)</span>
-              <span class="price-breakdown-value">€350</span>
-            </div>
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label"><strong>Total</strong></span>
-              <span class="price-breakdown-total">€350</span>
-            </div>
-          </div>
-          <ul class="price-features">
-            <li>Private chauffeur</li>
-            <li>Vehicle</li>
-            <li>24/7 support</li>
-          </ul>
-          <a href="contact.html" class="btn">Inquire Now</a>
-        </article>
+      <article class="itinerary-card package-card">
+        <div class="package-image-wrap">
+          <img class="package-image" src="assets/Mirissa-Beach.jpeg" alt="Sri Lanka Grand Experience" loading="lazy" />
+        </div>
+        <div class="itinerary-content">
+          <h3 class="itinerary-title package-title">Sri Lanka Grand Experience</h3>
+          <div class="package-days"><i class="fa-solid fa-moon" aria-hidden="true"></i> 9 Nights <span>•</span> <i class="fa-solid fa-sun" aria-hidden="true"></i> 10 Days</div>
+          <p class="itinerary-description package-description">Experience the best of Sri Lanka on this 10-day tour, blending culture, adventure, wildlife, and scenic beauty effortlessly.</p>
+          <button class="itinerary-cta" type="button">BOOK NOW <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
 
-        <article class="price-card">
-          <span class="vehicle-badge">🚗 Sedan Car</span>
-          <div class="vehicle-image-wrap">
-            <img src="assets/sedan.jpg" alt="Sedan car" loading="lazy" />
-          </div>
-          <div class="price-duration">6-10 <span>DAYS</span></div>
-          <div class="price-label">From Per Day</div>
-          <div class="price-amount"><sup>€</sup>55</div>
-          <div class="price-breakdown">
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label">Base Package for 10 days</span>
-              <span class="price-breakdown-value">€550</span>
-            </div>
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label">Vehicle (€55/day × 10)</span>
-              <span class="price-breakdown-value">€550</span>
-            </div>
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label"><strong>Total</strong></span>
-              <span class="price-breakdown-total">€550</span>
-            </div>
-          </div>
-          <ul class="price-features">
-            <li>Private chauffeur</li>
-            <li>Vehicle</li>
-            <li>24/7 support</li>
-          </ul>
-          <a href="contact.html" class="btn">Inquire Now</a>
-        </article>
-
-        <article class="price-card featured">
-          <span class="vehicle-badge">🚐 KDH Van</span>
-          <div class="vehicle-image-wrap">
-            <img src="assets/van.jpg" alt="KDH van" loading="lazy" />
-          </div>
-          <div class="price-duration">5-10 <span>DAYS</span></div>
-          <div class="price-label">From Per Day</div>
-          <div class="price-amount"><sup>€</sup>85</div>
-          <div class="price-breakdown">
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label">Base Package</span>
-              <span class="price-breakdown-value">€850</span>
-            </div>
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label">Vehicle (€85/day × 10)</span>
-              <span class="price-breakdown-value">€850</span>
-            </div>
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label"><strong>Total</strong></span>
-              <span class="price-breakdown-total">€850</span>
-            </div>
-          </div>
-          <ul class="price-features">
-            <li>Private chauffeur</li>
-            <li>24/7 dedicated support</li>
-          </ul>
-          <a href="contact.html" class="btn">Inquire Now</a>
-        </article>
-
-        <article class="price-card">
-          <span class="vehicle-badge">🚐 KDH Van</span>
-          <div class="vehicle-image-wrap">
-            <img src="assets/van.jpg" alt="KDH van" loading="lazy" />
-          </div>
-          <div class="price-duration">5 <span>DAYS</span></div>
-          <div class="price-label">From Per Person</div>
-          <div class="price-amount"><sup>€</sup>95</div>
-          <div class="price-breakdown">
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label">Base Package</span>
-              <span class="price-breakdown-value">€475</span>
-            </div>
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label">Vehicle (€95/day × 5)</span>
-              <span class="price-breakdown-value">€475</span>
-            </div>
-            <div class="price-breakdown-row">
-              <span class="price-breakdown-label"><strong>Total</strong></span>
-              <span class="price-breakdown-total">€475</span>
-            </div>
-          </div>
-          <ul class="price-features">
-            <li>Private  chauffeur</li>
-            <li>24/7 dedicated support</li>
-          </ul>
-          <a href="contact.html" class="btn">Inquire Now</a>
-        </article>
-
-        
-      </div>
-    </section>
-
-    <section class="itineraries-section section-reveal" aria-label="Famous routes and itineraries">
-      <div class="itineraries-header">
-        <p class="section-kicker">Popular Routes</p>
-        <h2>Famous Itineraries</h2>
-        <p>Carefully crafted routes combining the best attractions, hidden gems, and authentic experiences across Sri Lanka.</p>
-      </div>
-
-      <div class="itineraries-grid">
-        <article class="itinerary-card">
-          <div class="itinerary-map-wrap">
-            <div class="itinerary-badge">8 DAYS</div>
-            <img class="itinerary-map-image" src="assets/sl-map-route1.png" alt="Coastal Paradise route map" loading="lazy" />
-          </div>
-          <div class="itinerary-content">
-            <div class="itinerary-header-text">
-              <span class="itinerary-days">TOUR</span>
-              <span class="itinerary-days-num">8 DAYS</span>
-            </div>
-            <h3 class="itinerary-title">Coastal Paradise</h3>
-            <div class="itinerary-highlights">
-              <span class="itinerary-tag">Beach</span>
-              <span class="itinerary-tag">Wildlife</span>
-              <span class="itinerary-tag">Culture</span>
-            </div>
-            <p class="itinerary-description">Experience pristine beaches, whale watching, and iconic landmarks. A perfect blend of relaxation and adventure.</p>
-            <div class="itinerary-route">
-              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Nuwaraeliya ⇨ Ella ⇨ Yala ⇨ Mirissa ⇨ Galle ⇨ Benthota ⇨ Colombo
-            </div>
-            <a href="contact.html" class="itinerary-cta">View Details</a>
-          </div>
-        </article>
-
-        <article class="itinerary-card">
-          <div class="itinerary-map-wrap">
-            <div class="itinerary-badge">10 DAYS</div>
-            <img class="itinerary-map-image" src="assets/sl-map-route2.png" alt="Complete Island Tour route map" loading="lazy" />
-          </div>
-          <div class="itinerary-content">
-            <div class="itinerary-header-text">
-              <span class="itinerary-days">TOUR</span>
-              <span class="itinerary-days-num">10 DAYS</span>
-            </div>
-            <h3 class="itinerary-title">Complete Island Tour</h3>
-            <div class="itinerary-highlights">
-              <span class="itinerary-tag">Comprehensive</span>
-              <span class="itinerary-tag">All Regions</span>
-            </div>
-            <p class="itinerary-description">Visit all major attractions across Sri Lanka. From highlands to coast, covering beaches, temples, and wildlife sanctuaries.</p>
-            <div class="itinerary-route">
-              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Dambulla ⇨ Polonnaruwa ⇨ Negombo ⇨ Nuwaraeliya ⇨ Ella ⇨ Mirissa ⇨ Galle ⇨ Colombo
-            </div>
-            <a href="contact.html" class="itinerary-cta">View Details</a>
-          </div>
-        </article>
-
-        <article class="itinerary-card">
-          <div class="itinerary-map-wrap">
-            <div class="itinerary-badge">5 DAYS</div>
-            <img class="itinerary-map-image" src="assets/sl-map-route3.png" alt="Cultural Heritage route map" loading="lazy" />
-          </div>
-          <div class="itinerary-content">
-            <div class="itinerary-header-text">
-              <span class="itinerary-days">TOUR</span>
-              <span class="itinerary-days-num">5 DAYS</span>
-            </div>
-            <h3 class="itinerary-title">Cultural Heritage</h3>
-            <div class="itinerary-highlights">
-              <span class="itinerary-tag">Culture</span>
-              <span class="itinerary-tag">History</span>
-            </div>
-            <p class="itinerary-description">Immerse in Sri Lanka's rich cultural heritage. Ancient temples, UNESCO sites, and traditional villages await exploration.</p>
-            <div class="itinerary-route">
-              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Polonnaruwa ⇨ Trincomalee ⇨ Anuradhapura ⇨ Negombo ⇨ Colombo
-            </div>
-            <a href="contact.html" class="itinerary-cta">View Details</a>
-          </div>
-        </article>
-
-        <article class="itinerary-card">
-          <div class="itinerary-map-wrap">
-            <div class="itinerary-badge">12 DAYS</div>
-            <img class="itinerary-map-image" src="assets/sl-map-route5.png" alt="Adventure and Safari route map" loading="lazy" />
-          </div>
-          <div class="itinerary-content">
-            <div class="itinerary-header-text">
-              <span class="itinerary-days">TOUR</span>
-              <span class="itinerary-days-num">12 DAYS</span>
-            </div>
-            <h3 class="itinerary-title">Adventure & Safari</h3>
-            <div class="itinerary-highlights">
-              <span class="itinerary-tag">Adventure</span>
-              <span class="itinerary-tag">Wildlife</span>
-            </div>
-            <p class="itinerary-description">Thrilling safari experiences combined with hiking and water sports. Perfect for adventure seekers seeking adrenaline-pumping activities.</p>
-            <div class="itinerary-route">
-              <strong>Route:</strong> Airport ⇨ Dambulla ⇨ Yala Safari ⇨ Udawalava ⇨ Climb Adam's Peak ⇨ Ella Hiking ⇨ Mirissa Surfing ⇨ Galle
-            </div>
-            <a href="contact.html" class="itinerary-cta">View Details</a>
-          </div>
-        </article>
-
-        <article class="itinerary-card">
-          <div class="itinerary-map-wrap">
-            <div class="itinerary-badge">15 DAYS</div>
-            <img class="itinerary-map-image" src="assets/sri-lankan-travel-map.png" alt="Ultimate Sri Lanka route map" loading="lazy" />
-          </div>
-          <div class="itinerary-content">
-            <div class="itinerary-header-text">
-              <span class="itinerary-days">TOUR</span>
-              <span class="itinerary-days-num">15 DAYS</span>
-            </div>
-            <h3 class="itinerary-title">Ultimate Sri Lanka</h3>
-            <div class="itinerary-highlights">
-              <span class="itinerary-tag">Premium</span>
-              <span class="itinerary-tag">Luxury</span>
-            </div>
-            <p class="itinerary-description">The complete Sri Lankan experience. Luxury accommodations, private experiences, and exclusive access to hidden locations.</p>
-            <div class="itinerary-route">
-              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Nuwaraeliya ⇨ Ella ⇨ Udawalava ⇨ Yala ⇨ Mirissa ⇨ Bentota ⇨ Galle ⇨ Sigiriya ⇨ Colombo
-            </div>
-            <a href="contact.html" class="itinerary-cta">View Details</a>
-          </div>
-        </article>
-
-        <article class="itinerary-card">
-          <div class="itinerary-map-wrap">
-            <div class="itinerary-badge">11 DAYS</div>
-            <img class="itinerary-map-image" src="assets/Sri Lanka Map.png" alt="North and East Explorer route map" loading="lazy" />
-          </div>
-          <div class="itinerary-content">
-            <div class="itinerary-header-text">
-              <span class="itinerary-days">TOUR</span>
-              <span class="itinerary-days-num">11 DAYS</span>
-            </div>
-            <h3 class="itinerary-title">North & East Explorer</h3>
-            <div class="itinerary-highlights">
-              <span class="itinerary-tag">Exploration</span>
-              <span class="itinerary-tag">Authentic</span>
-            </div>
-            <p class="itinerary-description">Discover the less-traveled northern and eastern regions. Pristine beaches, quiet towns, and authentic cultural interactions.</p>
-            <div class="itinerary-route">
-              <strong>Route:</strong> Airport ⇨ Kandy ⇨ Dambulla ⇨ Anuradhapura ⇨ Jaffna ⇨ Trincomalee ⇨ Arugambe ⇨ Colombo
-            </div>
-            <a href="contact.html" class="itinerary-cta">View Details</a>
-          </div>
-        </article>
-      </div>
+      <article class="itinerary-card package-card">
+        <div class="package-image-wrap">
+          <img class="package-image" src="assets/yala.jpg" alt="Wild Life Tour" loading="lazy" />
+        </div>
+        <div class="itinerary-content">
+          <h3 class="itinerary-title package-title">Wild Life Tour</h3>
+          <div class="package-days"><i class="fa-solid fa-moon" aria-hidden="true"></i> 13 Nights <span>•</span> <i class="fa-solid fa-sun" aria-hidden="true"></i> 14 Days</div>
+          <p class="itinerary-description package-description">Experience Sri Lanka's diverse wildlife and nature with thrilling safaris, national parks, and unforgettable encounters on this 14-day tour.</p>
+          <button class="itinerary-cta" type="button">BOOK NOW <span aria-hidden="true">→</span></button>
+        </div>
+      </article>
     </section>
 
     <div class="itinerary-modal" id="itinerary-modal" aria-hidden="true">
@@ -1157,7 +628,7 @@
   </main>
 
   <footer class="site-footer" id="contact">
-    <p class="footer-wordmark">Upcountry Travels</p>
+    <p class="footer-wordmark"><span class="brand-hot">Upcountry</span> <span class="brand-cool">Travels</span></p>
 
     <div class="footer-grid">
       <section>
@@ -1172,10 +643,10 @@
 
       <section>
         <h4>Company</h4>
-        <a href="index.html#home">Home</a>
-        <a href="destinations.html">Destinations</a>
+        <a href="#home">Home</a>
+        <a href="#destinations">Destinations</a>
         <a href="packages.html">Packages</a>
-        <a href="index.html#gallery">Gallery</a>
+        <a href="#gallery">Gallery</a>
         <a href="contact.html">Contact</a>
       </section>
 
@@ -1189,8 +660,8 @@
 
       <section>
         <h4>Get In Touch</h4>
-        <p>No. 21, Castel Lane, Kandy, Sri Lanka.</p>
-        <p>+94 77 780 7055</p>
+        <p>Kandy, Sri Lanka.</p>
+        <p>+94 76 669 4794</p>
         <p>rmprathnabandara@gmail.com</p>
       </section>
     </div>

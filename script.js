@@ -1337,6 +1337,70 @@ if (itineraryModal && itineraryCtaButtons.length) {
         'Authentic local cuisine experiences',
         'Homestay cultural stays included'
       ]
+    },
+    'Culture and Heritage': {
+      days: '14 DAYS',
+      highlights: ['Culture', 'Heritage', 'Wildlife'],
+      description: 'Explore Sri Lanka\'s rich culture, wildlife, and scenic beauty on this 14-day journey, blending adventure, relaxation, and unforgettable experiences.',
+      route: 'Airport ⇨ Sigiriya ⇨ Kandy ⇨ Nuwara Eliya ⇨ Ella ⇨ Yala ⇨ Mirissa ⇨ Galle ⇨ Colombo',
+      mapImage: 'assets/sl-map-route3.png',
+      mapLink: 'https://www.google.com/maps/search/?api=1&query=Sigiriya+Kandy+Nuwara+Eliya+Ella+Yala+Mirissa+Galle+Colombo+Sri+Lanka',
+      included: [
+        'Sigiriya and heritage site visits',
+        'Cultural village experiences',
+        'Wildlife and safari experiences',
+        'Tea country scenic journey',
+        'Beach relaxation time',
+        'Private guided transport support'
+      ]
+    },
+    'Sri Lanka Discovery': {
+      days: '9 DAYS',
+      highlights: ['Culture', 'Nature', 'Adventure'],
+      description: 'A perfect mix of culture, nature, and adventure, this 9-day Sri Lankan tour promises unforgettable moments and unique experiences.',
+      route: 'Airport ⇨ Kandy ⇨ Nuwara Eliya ⇨ Ella ⇨ Mirissa ⇨ Galle ⇨ Colombo',
+      mapImage: 'assets/sl-map-route1.png',
+      mapLink: 'https://www.google.com/maps/search/?api=1&query=Kandy+Nuwara+Eliya+Ella+Mirissa+Galle+Colombo+Sri+Lanka',
+      included: [
+        'Hill country and tea estate visits',
+        'Scenic train and nature stops',
+        'Beach and city highlights',
+        'Flexible private touring',
+        'Local guide support',
+        'Comfortable accommodation planning'
+      ]
+    },
+    'Sri Lanka Grand Experience': {
+      days: '10 DAYS',
+      highlights: ['Culture', 'Adventure', 'Wildlife'],
+      description: 'Experience the best of Sri Lanka on this 10-day tour, blending culture, adventure, wildlife, and scenic beauty effortlessly.',
+      route: 'Airport ⇨ Dambulla ⇨ Kandy ⇨ Ella ⇨ Yala ⇨ Mirissa ⇨ Galle ⇨ Colombo',
+      mapImage: 'assets/sl-map-route2.png',
+      mapLink: 'https://www.google.com/maps/search/?api=1&query=Dambulla+Kandy+Ella+Yala+Mirissa+Galle+Colombo+Sri+Lanka',
+      included: [
+        'Cultural and scenic route planning',
+        'Wildlife safari experience',
+        'Beach and sunset stops',
+        'Private transport throughout',
+        'Flexible custom itinerary support',
+        'Local assistance 24/7'
+      ]
+    },
+    'Wild Life Tour': {
+      days: '14 DAYS',
+      highlights: ['Wildlife', 'Nature', 'Safari'],
+      description: 'Experience Sri Lanka\'s diverse wildlife and nature with thrilling safaris, national parks, and unforgettable encounters on this 14-day tour.',
+      route: 'Airport ⇨ Udawalawe ⇨ Yala ⇨ Wasgamuwa ⇨ Minneriya ⇨ Sinharaja ⇨ Colombo',
+      mapImage: 'assets/sl-map-route5.png',
+      mapLink: 'https://www.google.com/maps/search/?api=1&query=Udawalawe+Yala+Wasgamuwa+Minneriya+Sinharaja+Colombo+Sri+Lanka',
+      included: [
+        'Multiple safari game drives',
+        'National park entry arrangements',
+        'Nature lodge and eco-stay options',
+        'Birdwatching and forest experiences',
+        'Private guide and vehicle support',
+        'Flexible wildlife itinerary planning'
+      ]
     }
   };
 
